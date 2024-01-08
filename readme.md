@@ -12,7 +12,7 @@ Add a dev.js file inside config folder with variables matching in prod.js and up
 npm install
 ```
 
-Again inside server/client
+Again inside client folder
 ```
 npm install
 ```
