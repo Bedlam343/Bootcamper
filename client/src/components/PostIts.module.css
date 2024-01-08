@@ -1,0 +1,38 @@
+.container {
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  color: rgb(120, 117, 117);
+  font-size: 12px;
+}
+
+.postIts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.postIt {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid grey;
+  border-radius: 10px;
+  height: 20px;
+  padding: 0.2rem;
+  width: fit-content;
+  margin: 0rem 0.3rem 0.3rem 0rem;
+}
+
+.postIt .cross {
+  color: rgb(44, 44, 44);
+  padding: 0rem;
+  margin-left: 0.6rem;
+  border: none;
+  background: #f7f7f7;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.postIt .cross:hover {
+  cursor: pointer;
+}

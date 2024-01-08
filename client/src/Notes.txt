@@ -1,0 +1,3 @@
+THINGS TO DO:
+
+1) Log out user after some period of inactivity (30 minutes).

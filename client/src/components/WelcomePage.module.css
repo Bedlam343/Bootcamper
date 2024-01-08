@@ -1,0 +1,89 @@
+body,
+html {
+  background: rgb(241, 240, 240);
+}
+
+.title {
+  color: rgb(44, 44, 44);
+  margin-top: 2rem;
+}
+
+.title span {
+  color: rgb(224, 85, 85);
+}
+
+.top {
+  width: 75%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.mission {
+  color: rgb(44, 44, 44);
+}
+
+.mission h2 {
+  padding-top: 1rem;
+}
+.mission h3 {
+  padding: 0rem 1rem 1rem;
+}
+
+.mission h3 span {
+  color: rgb(224, 85, 85);
+}
+
+.featureContainer {
+  width: 100%;
+  background: rgb(44, 44, 44);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.featureContainer h2 {
+  color: rgb(241, 240, 240);
+}
+
+.featureContainer h2 span {
+  color: rgb(224, 85, 85);
+}
+
+.features {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0rem 1rem 1rem;
+  width: 80%;
+}
+
+.feature {
+  width: 400px;
+  background: rgb(241, 240, 240);
+  color: rgb(44, 44, 44);
+  margin: 1rem;
+}
+
+.image {
+  width: 400px;
+}
+
+.certifiedContainer {
+  background: white;
+}
+.certified {
+  width: 250px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom h2 {
+  margin-bottom: 0rem;
+}

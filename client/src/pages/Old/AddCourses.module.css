@@ -1,0 +1,40 @@
+body {
+    height: 100%;
+    background: rgb(225, 224, 224);
+}
+
+.outerContainer {
+  background: rgb(225, 224, 224);
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.innerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  align-items: center;
+  background: #f7f7f7;
+  box-shadow: 0 30px 40px rgba(168, 168, 168, 0.715);
+  border-radius: 5px;
+  margin: 2rem 0rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons Button {
+    margin: 1rem;
+}
+
+.formContainer {
+  width: 70%;
+}
