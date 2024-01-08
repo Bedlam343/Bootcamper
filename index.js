@@ -13,6 +13,7 @@ const hpp = require("hpp");
 const cors = require("cors");
 const errorHandler = require("./middleware/error");
 const connectDB = require("./config/db");
+const keys = require("./config/keys");
 
 // Connect to database
 connectDB();

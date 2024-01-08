@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Bootcamper backend API",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
