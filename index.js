@@ -28,7 +28,7 @@ const reviews = require("./routes/reviews");
 const app = express();
 
 // trust proxy
-app.enable("trust proxy");
+// app.enable("trust proxy");
 
 // Body parser (parse body of request)
 app.use(express.json());
@@ -64,7 +64,7 @@ app.use(limiter);
 app.use(hpp());
 
 // Enable CORS
-app.use(cors());
+// app.use(cors());
 
 // Set static folder (public folder)
 app.use(express.static(path.join(__dirname, "public")));
