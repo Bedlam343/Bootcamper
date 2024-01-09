@@ -48,7 +48,24 @@ app.use(fileupload());
 app.use(mongoSanitize());
 
 // Set security headers
-app.use(helmet());
+// app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'", 'google.com', 'youtube.com'],
+        styleSrc: ["'self'", 'google.com', 'youtube.com', "'unsafe-inline'"],
+        scriptSrc: ["'self'", 'google.com', 'youtube.com', "'unsafe-inline'"],
+        imgSrc: ["'self'", 'google.com', 'youtube.com', 'data:', 'blob:'],
+        connectSrc: ["'self'", 'google.com', 'youtube.com', 'ws:', 'wss:'],
+        frameSrc: ["'self'", 'google.com', 'youtube.com'],
+        frameAncestors: ["'self'", 'google.com', 'youtube.com'],
+        mediaSrc: ["'self'", 'google.com', 'youtube.com', 'data:', 'blob:'],
+      },
+    },
+    frameguard: { action: 'SAMEORIGIN' },
+  })
+);
 
 // Prevent XSS attacks
 app.use(xss());
