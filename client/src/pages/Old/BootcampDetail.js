@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { Await, json, redirect, useRouteLoaderData } from "react-router-dom";
 import BootcampItem from "../components/Bootcamp/BootcampItem";
-import { BACKEND_URL } from "../constants";
 
 const BootcampDetailPage = () => {
   const bootcamp = useRouteLoaderData("bootcampDetail");
@@ -31,7 +30,7 @@ export async function action({ request }) {
   const authorization = "Bearer " + userToken;
 
   const response = await fetch(
-    `${BACKEND_URL}/api/v1/bootcamps/${bootcampId}`,
+    `/api/v1/bootcamps/${bootcampId}`,
     {
       method: "delete",
       headers: {

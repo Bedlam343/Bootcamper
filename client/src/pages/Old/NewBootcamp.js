@@ -1,5 +1,4 @@
 import { Await, json, redirect, useRouteLoaderData } from "react-router-dom";
-import { BACKEND_URL } from "../constants";
 import { Suspense, useContext } from "react";
 import AuthContext from "../store/auth-context";
 import NewBootcamp from "../components/Bootcamp/NewBootcamp";
@@ -43,7 +42,7 @@ export async function action({ request }) {
 
   const token = localStorage.getItem("token");
   const authorization = `Bearer ${token}`;
-  let response = await fetch(`${BACKEND_URL}/api/v1/bootcamps`, {
+  let response = await fetch(`/api/v1/bootcamps`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

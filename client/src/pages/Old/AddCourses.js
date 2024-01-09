@@ -10,7 +10,6 @@ import classes from "./AddCourses.module.css";
 import CourseForm from "../components/Course/CourseForm";
 import { useState } from "react";
 import CourseItemList from "../components/Course/CourseItemList";
-import { BACKEND_URL } from "../constants";
 
 const AddCoursesPage = () => {
   let courses = useLoaderData();
@@ -93,7 +92,7 @@ const AddCoursesPage = () => {
 export async function loader({ params }) {
   const bootcampId = params.bootcampId;
   const response = await fetch(
-    `${BACKEND_URL}/api/v1/bootcamps/` + bootcampId + "/courses"
+    `/api/v1/bootcamps/` + bootcampId + "/courses"
   );
 
   if (!response.ok) {
@@ -129,7 +128,7 @@ export async function action({ params, request }) {
       scholarshipsAvailable: newCourse.scholarshipsAvailable,
     };
     response = await fetch(
-      `${BACKEND_URL}/api/v1/bootcamps/${bootcampId}/courses`,
+      `/api/v1/bootcamps/${bootcampId}/courses`,
       {
         method: "POST",
         headers: {
@@ -140,7 +139,7 @@ export async function action({ params, request }) {
       }
     );
   } else if (formData.get("method") === "UPDATE") {
-    response = await fetch(`${BACKEND_URL}/api/v1/courses/${newCourse._id}`, {
+    response = await fetch(`/api/v1/courses/${newCourse._id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -150,7 +149,7 @@ export async function action({ params, request }) {
     });
   } else if (formData.get("method") === "DELETE") {
     response = await fetch(
-      `${BACKEND_URL}/api/v1/courses/${formData.get("courseId")}`,
+      `/api/v1/courses/${formData.get("courseId")}`,
       {
         method: "DELETE",
         headers: {

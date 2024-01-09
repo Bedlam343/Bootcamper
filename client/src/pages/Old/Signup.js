@@ -1,6 +1,5 @@
 import { json, redirect } from "react-router-dom";
 import SignupForm from "../components/User/SignupForm";
-import { BACKEND_URL } from "../constants";
 import { useContext } from "react";
 import AuthContext from "../store/auth-context";
 
@@ -22,7 +21,7 @@ export async function action({ request }) {
     role: formData.get("role"),
   };
 
-  let response = await fetch(`${BACKEND_URL}/api/v1/auth/register`, {
+  let response = await fetch(`/api/v1/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -50,7 +49,7 @@ export async function action({ request }) {
 
   const authorization = `Bearer ${token}`;
   // get user id
-  response = await fetch(`${BACKEND_URL}/api/v1/auth/me`, {
+  response = await fetch(`/api/v1/auth/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

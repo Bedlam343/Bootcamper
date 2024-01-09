@@ -1,6 +1,5 @@
 import axios from "axios";
 import { redirect } from "react-router-dom";
-import { BACKEND_URL } from "constants";
 
 const login = async ({ request }) => {
   const data = await request.formData();
@@ -12,7 +11,7 @@ const login = async ({ request }) => {
 
   try {
     const response = await axios.post(
-      `${BACKEND_URL}/api/v1/auth/login`,
+      `/api/v1/auth/login`,
       authData,
       {
         headers: {

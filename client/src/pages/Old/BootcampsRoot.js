@@ -1,5 +1,4 @@
 import { Outlet, defer, json } from "react-router-dom";
-import { BACKEND_URL } from "../constants";
 
 const BootcampsRootLayout = () => {
   return (
@@ -10,7 +9,7 @@ const BootcampsRootLayout = () => {
 };
 
 async function loadBootcamps() {
-  const response = await fetch(`${BACKEND_URL}/api/v1/bootcamps`);
+  const response = await fetch(`/api/v1/bootcamps`);
 
   if (!response.ok) {
     throw json({ message: "Could not fetch bootcamps." }, { status: 500 });

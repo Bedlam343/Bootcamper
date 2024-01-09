@@ -1,5 +1,4 @@
 import { Outlet, json } from "react-router-dom";
-import { BACKEND_URL } from "../constants";
 
 const BootcampDetailLayout = () => {
   return (
@@ -10,7 +9,7 @@ const BootcampDetailLayout = () => {
 };
 
 async function loadBootcamp(bootcampId) {
-  const response = await fetch(`${BACKEND_URL}/api/v1/bootcamps/${bootcampId}`);
+  const response = await fetch(`/api/v1/bootcamps/${bootcampId}`);
 
   if (!response.ok) {
     throw json({ message: "Could not fetch bootcamp." }, { status: 500 });
@@ -22,7 +21,7 @@ async function loadBootcamp(bootcampId) {
 
 async function loadCourses(bootcampId) {
   const response = await fetch(
-    `${BACKEND_URL}/api/v1/bootcamps/${bootcampId}/courses`
+    `/api/v1/bootcamps/${bootcampId}/courses`
   );
 
   if (!response.ok) {

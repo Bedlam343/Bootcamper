@@ -1,5 +1,4 @@
 import { json, redirect, useRouteLoaderData } from "react-router-dom";
-import { BACKEND_URL } from "../constants";
 import EditBootcamp from "../components/Bootcamp/EditBootcamp";
 
 const EditBootcampPage = () => {
@@ -32,7 +31,7 @@ export async function action({ params, request }) {
   const formData = await request.formData();
 
   let response;
-  let url = `${BACKEND_URL}/api/v1`;
+  let url = `/api/v1`;
   const method = formData.get("method");
 
   if (method === "POST_COURSE") {
@@ -75,7 +74,7 @@ export async function action({ params, request }) {
   //     jobGuarantee: formData.get("jobGuarantee") === "on",
   //     acceptGi: formData.get("acceptGi") === "on",
   //   };
-  //   response = await fetch(`${BACKEND_URL}/api/v1/bootcamps/${bootcampId}`, {
+  //   response = await fetch(`/api/v1/bootcamps/${bootcampId}`, {
   //     method: "PUT",
   //     headers: {
   //       "Content-Type": "application/json",
@@ -101,7 +100,7 @@ export async function action({ params, request }) {
   //     scholarshipsAvailable: course.scholarshipsAvailable,
   //   };
   //   response = await fetch(
-  //     `${BACKEND_URL}/api/v1/bootcamps/${bootcampId}/courses`,
+  //     `/api/v1/bootcamps/${bootcampId}/courses`,
   //     {
   //       method: "POST",
   //       headers: {
@@ -112,7 +111,7 @@ export async function action({ params, request }) {
   //     }
   //   );
   // } else if (formData.get("method") === "UPDATE_COURSE") {
-  //   response = await fetch(`${BACKEND_URL}/api/v1/courses/${course._id}`, {
+  //   response = await fetch(`/api/v1/courses/${course._id}`, {
   //     method: "PUT",
   //     headers: {
   //       "Content-Type": "application/json",
@@ -122,7 +121,7 @@ export async function action({ params, request }) {
   //   });
   // } else if (formData.get("method") === "DELETE_COURSE") {
   //   response = await fetch(
-  //     `${BACKEND_URL}/api/v1/courses/${formData.get("courseId")}`,
+  //     `/api/v1/courses/${formData.get("courseId")}`,
   //     {
   //       method: "DELETE",
   //       headers: {
