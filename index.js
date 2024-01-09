@@ -27,6 +27,9 @@ const reviews = require("./routes/reviews");
 
 const app = express();
 
+// trust proxy
+app.enable("trust proxy");
+
 // Body parser (parse body of request)
 app.use(express.json());
 
