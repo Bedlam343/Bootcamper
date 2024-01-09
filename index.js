@@ -73,7 +73,7 @@ app.use(
 app.use(hpp());
 
 // Enable CORS
-// app.use(cors());
+app.use(cors());
 
 // Mount routers
 app.use("/api/v1/bootcamps", bootcamps);

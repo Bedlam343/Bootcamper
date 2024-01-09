@@ -23,7 +23,6 @@ const BootcampCard = ({ id, user, name, description, averageCost, photo }) => {
             height={250}
             src={photoUrl}
             alt="green iguana"
-            crossOrigin="anonymous"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
