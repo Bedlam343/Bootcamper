@@ -53,6 +53,15 @@ app.use(helmet());
 // Prevent XSS attacks
 app.use(xss());
 
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "img-src": ["'self'", "https: data:"]
+    }
+  })
+)
+
 // Rate limiting
 // const limiter = rateLimit({
 //   windowMs: 10 * 60 * 1000, // 10 minutes
