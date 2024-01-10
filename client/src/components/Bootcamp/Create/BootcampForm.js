@@ -57,6 +57,10 @@ const BootcampForm = ({
       data.zipcode,
       data.country
     );
+    data.jobGuarantee = Boolean(data.jobGuarantee);
+    data.jobAssistance = Boolean(data.jobAssistance);
+    data.housing = Boolean(data.housing);
+    data.acceptGi = Boolean(data.acceptGi);
     onBootcampFormSubmit(data);
   };
 

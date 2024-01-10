@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-import BootcampProvider from "./BootcampProvider";
+import { BootcampProvider } from "./BootcampProvider";
 
 const BootcampContextLayout = () => {
   return (

@@ -2,28 +2,31 @@ import { Container, Paper, Typography } from "@mui/material";
 import Loading from "common/Loading";
 import BootcampForm from "components/Bootcamp/Create/BootcampForm";
 import Modal from "modal/Modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   redirect,
-  useLocation,
+  useActionData,
   useNavigate,
+  useParams,
   useSubmit,
 } from "react-router-dom";
 import { updateBootcamp } from "service";
 import { useAuth } from "store/AuthProvider";
+import { useBootcamp } from "store/BootcampProvider";
 import { splitAddress } from "util/helpers";
 
 const EditBootcamp = () => {
-  const location = useLocation();
+  const { bootcamp, setBootcamp } = useBootcamp();
   const submit = useSubmit();
   const navigate = useNavigate();
+  const { bootcampId } = useParams();
+
+  console.log(bootcampId);
+
+  const actionData = useActionData();
   const [displayModal, setDisplayModal] = useState(false);
 
   const { token } = useAuth();
-
-  const {
-    state: { bootcamp },
-  } = location;
 
   if (!bootcamp.street) {
     const { street, city, state, zipcode, country } = splitAddress(
@@ -36,6 +39,12 @@ const EditBootcamp = () => {
     bootcamp.country = country;
   }
 
+  useEffect(() => {
+    if (actionData?.error) {
+      setDisplayModal(false);
+    }
+  }, [actionData]);
+
   const handleModalClose = () => {
     setDisplayModal(false);
   };
@@ -45,6 +54,8 @@ const EditBootcamp = () => {
   };
 
   const handleSubmit = (modifiedBootcamp) => {
+    console.log(modifiedBootcamp);
+    setBootcamp(modifiedBootcamp);
     setDisplayModal(true);
     const formData = new FormData();
     formData.append("bootcamp", JSON.stringify(modifiedBootcamp));
@@ -77,6 +88,7 @@ const EditBootcamp = () => {
             onCancel={onCancel}
             onBootcampFormSubmit={handleSubmit}
             bootcamp={bootcamp}
+            error={actionData?.error}
             rightBtnText="Save"
           />
         </Paper>
@@ -92,12 +104,18 @@ export const action = async ({ request, params }) => {
   const bootcamp = JSON.parse(formData.get("bootcamp"));
   const token = formData.get("token");
 
-  console.log(bootcamp);
-
   try {
     await updateBootcamp(bootcamp, bootcampId, token);
   } catch (error) {
     console.log(error);
+
+    if (error.response.status === 400) {
+      return error.response.data;
+    }
+
+    return {
+      error: "Something went wrong. Please try again later.",
+    };
   }
 
   return redirect(`/bootcamps/${bootcampId}`);

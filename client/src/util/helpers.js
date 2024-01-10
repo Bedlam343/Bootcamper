@@ -9,14 +9,15 @@ export const combineAddress = (street, city, state, zipcode, country) => {
 };
 
 export const splitAddress = (address) => {
+  if (!address) return {};
   const [street, city, stateAndZipcode, country] = address.split(",");
   const [state, zipcode] = stateAndZipcode.trim().split(" ");
   return {
-    street,
-    city,
-    state,
-    zipcode,
-    country,
+    street: street.trim(),
+    city: city.trim(),
+    state: state.trim(),
+    zipcode: zipcode.trim(),
+    country: country.trim(),
   };
 };
 

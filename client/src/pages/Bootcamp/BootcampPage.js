@@ -2,11 +2,18 @@ import { useLoaderData } from "react-router-dom";
 
 import { deleteBootcamp, getBootcamp, getCoursesForBootcamp } from "service";
 import { useAuth } from "store/AuthProvider";
+import { useBootcamp } from "store/BootcampProvider";
 import BootcampDetails from "components/Bootcamp/BootcampDetails";
+import { useEffect } from "react";
 
 const BootcampPage = () => {
   const { bootcamp, courses } = useLoaderData();
   const { id, role } = useAuth();
+  const { setBootcamp } = useBootcamp();
+
+  useEffect(() => {
+    setBootcamp(bootcamp);
+  }, [bootcamp]);
 
   const canEdit = role === "admin" || id === bootcamp.user;
 
@@ -25,6 +32,7 @@ const loadBootcamp = async (bootcampId) => {
   }
   return bootcamp;
 };
+
 const loadCourses = async (bootcampId) => {
   let courses = null;
   try {
@@ -54,7 +62,6 @@ export const action = async ({ request, params }) => {
     return null;
   } catch (error) {
     console.log(error);
-    return error.response.data.message;
   }
 };
 

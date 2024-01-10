@@ -30,6 +30,7 @@ import EditBootcampPage, {
 import login from "actions/login";
 import logout from "actions/logout";
 import signup from "actions/signup";
+import BootcampContextLayout from "store/BootcampContextLayout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,22 +46,28 @@ const router = createBrowserRouter(
         <Route path="login" element={<LoginPage />} action={login} />
         <Route path="signup" element={<SignupPage />} action={signup} />
 
-        <Route path="bootcamps" element={<BootcampsRoot />}>
-          <Route index element={<AllBootcamps />} loader={allBootcampsLoader} />
-          <Route path="my-bootcamps" element={<MyBootcamps />} />
-        </Route>
+        <Route element={<BootcampContextLayout />}>
+          <Route path="bootcamps" element={<BootcampsRoot />}>
+            <Route
+              index
+              element={<AllBootcamps />}
+              loader={allBootcampsLoader}
+            />
+            <Route path="my-bootcamps" element={<MyBootcamps />} />
+          </Route>
 
-        <Route
-          path="bootcamps/:bootcampId"
-          loader={bootcampLoader}
-          action={deleteBootcampAction}
-          element={<BootcampPage />}
-        />
-        <Route
-          path="bootcamps/:bootcampId/edit"
-          element={<EditBootcampPage />}
-          action={updateBootcampAction}
-        />
+          <Route
+            path="bootcamps/:bootcampId"
+            loader={bootcampLoader}
+            action={deleteBootcampAction}
+            element={<BootcampPage />}
+          />
+          <Route
+            path="bootcamps/:bootcampId/edit"
+            element={<EditBootcampPage />}
+            action={updateBootcampAction}
+          />
+        </Route>
         <Route
           path="bootcamps/new"
           element={<NewBootcamp />}

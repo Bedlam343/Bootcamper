@@ -1,52 +1,38 @@
-import { useReducer } from "react";
+import { useContext, useReducer } from "react";
 import BootcampContext from "./bootcamp-context";
 
-const initialBootcamps = [];
+const defaultState = {};
 
 const bootcampsReducer = (state, action) => {
-  if (action.type === "ADD") {
-    // add bootcamp if unique
-    if (
-      state.filter((bootcamp) => bootcamp._id === action.bootcamp._id)
-        .length === 0
-    ) {
-      return [action.bootcamp, ...state];
-    }
-    return [...state];
-  }
-  if (action.type === "EDIT") {
-  }
-  if (action.type === "REMOVE") {
-    // remove bootcamp with bootcampId and return new array
-    return state.filter((bootcamp) => bootcamp._id !== action.bootcampId);
+  if (action.type === "SET") {
+    return action.bootcamp;
   }
 
-  return initialBootcamps;
+  if (action.type === "CLEAR") {
+    return defaultState;
+  }
+
+  return defaultState;
 };
 
 const BootcampProvider = (props) => {
-  const [bootcampsState, dispatchBootcampsAction] = useReducer(
+  const [bootcamp, dispatchBootcampAction] = useReducer(
     bootcampsReducer,
-    initialBootcamps
+    defaultState
   );
 
-  const addBootcamp = (bootcamp) => {
-    dispatchBootcampsAction({ type: "ADD", bootcamp: bootcamp });
+  const setBootcamp = (bootcamp) => {
+    dispatchBootcampAction({ type: "SET", bootcamp: bootcamp });
   };
 
-  const editBootcamp = (bootcampId, updatedBootcamp) => {
-    dispatchBootcampsAction({ type: "EDIT", bootcampId, updatedBootcamp });
-  };
-
-  const removeBootcamp = (bootcampId) => {
-    dispatchBootcampsAction({ type: "DELETE", bootcampId: bootcampId });
+  const clearBootcamp = () => {
+    dispatchBootcampAction({ type: "CLEAR" });
   };
 
   const bootcampContext = {
-    bootcamps: bootcampsState,
-    addBootcamp,
-    editBootcamp,
-    removeBootcamp,
+    bootcamp,
+    setBootcamp,
+    clearBootcamp,
   };
 
   return (
@@ -56,4 +42,9 @@ const BootcampProvider = (props) => {
   );
 };
 
-export default BootcampProvider;
+const useBootcamp = () => {
+  const bootcampContext = useContext(BootcampContext);
+  return bootcampContext;
+};
+
+export { BootcampProvider, useBootcamp };
