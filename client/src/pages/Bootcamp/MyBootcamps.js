@@ -7,12 +7,13 @@ import { useAuth } from "store/AuthProvider";
 
 const MyBootcamps = () => {
   const { id: userId, token } = useAuth();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [bootcamps, setBootcamps] = useState([]);
 
   useEffect(() => {
     const fetchBootcamps = async () => {
       try {
+        setLoading(true);
         const response = await getMyBootcamps(userId, token);
         console.log(response.data.data);
         setBootcamps(response.data.data);
@@ -30,6 +31,13 @@ const MyBootcamps = () => {
   const render = () => {
     if (loading) {
       return <Loading />;
+    }
+    if(!token) {
+      return (
+        <Typography variant="h3" align="center">
+          Please login to view your bootcamps.
+        </Typography>
+      );
     }
     if (bootcamps.length > 0) {
       return (
