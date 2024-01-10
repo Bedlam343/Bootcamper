@@ -42,11 +42,19 @@ export const action = async ({ request }) => {
     for (const course of courses) {
       response = await createCourse(course, bootcampId, token);
     }
+
+    return redirect(`/bootcamps/${bootcampId}`);
   } catch (error) {
     console.log(error);
-  }
 
-  return redirect("/bootcamps/my-bootcamps");
+    if (error.response.status === 400) {
+      return error.response.data;
+    }
+
+    return {
+      error: "Something went wrong. Please try again later.",
+    };
+  }
 };
 
 export default NewBootcamp;

@@ -1,3 +1,5 @@
+import { Typography } from "@mui/material";
+
 export const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
@@ -16,4 +18,19 @@ export const splitAddress = (address) => {
     zipcode,
     country,
   };
+};
+
+export const errorMessage = (error) => {
+  if (error) {
+    return (
+      <Typography
+        sx={{ marginTop: "2em" }}
+        fontSize="18px"
+        color="error"
+        align="center"
+      >
+        {error}
+      </Typography>
+    );
+  }
 };

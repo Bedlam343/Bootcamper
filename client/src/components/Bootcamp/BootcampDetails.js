@@ -30,6 +30,8 @@ const BootcampDetails = ({ bootcamp, courses, canEdit }) => {
     navigate(-1);
   };
 
+  const address = bootcamp.address || bootcamp.location.formattedAddress;
+
   return (
     <>
       <Box
@@ -137,17 +139,16 @@ const BootcampDetails = ({ bootcamp, courses, canEdit }) => {
             )}
           </Grid>
 
-          {bootcamp.address ||
-            (bootcamp.location?.formattedAddress && (
-              <Grid item xs={12} justifyContent="center">
-                <Typography variant="h6" align="center">
-                  Located at:
-                </Typography>
-                <Typography sx={{ textTransform: "uppercase" }} align="center">
-                  {bootcamp.address || bootcamp.location?.formattedAddress}
-                </Typography>
-              </Grid>
-            ))}
+          {address && (
+            <Grid item xs={12} justifyContent="center">
+              <Typography variant="h6" align="center">
+                Located at:
+              </Typography>
+              <Typography sx={{ textTransform: "uppercase" }} align="center">
+                {bootcamp.address || bootcamp.location?.formattedAddress}
+              </Typography>
+            </Grid>
+          )}
 
           <Grid item xs={12}>
             {bootcamp.averageRating && (

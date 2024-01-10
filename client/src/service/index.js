@@ -30,7 +30,7 @@ export const getMyBootcamps = (userId, token) => {
 };
 
 export const createBootcamp = (bootcamp, token) => {
-  return axios.post(`/api/v1/bootcamps`, bootcamp, {
+  return axios.post("/api/v1/bootcamps", bootcamp, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

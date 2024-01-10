@@ -23,7 +23,6 @@ const MyBootcamps = () => {
     };
 
     if (token && userId) {
-      console.log("Fetching User Bootcamps");
       fetchBootcamps();
     }
   }, [token, userId]);

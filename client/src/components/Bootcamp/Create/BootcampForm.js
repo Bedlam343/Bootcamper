@@ -11,13 +11,14 @@ import { PropTypes } from "prop-types";
 import Address from "common/Address";
 import CareersDropdown from "../CareersDropdown";
 import { useState } from "react";
-import { combineAddress, splitAddress } from "util/helpers";
+import { combineAddress, errorMessage } from "util/helpers";
 
 const BootcampForm = ({
   bootcamp,
   onCancel,
   onBootcampFormSubmit,
   rightBtnText,
+  error,
 }) => {
   const [data, setData] = useState(bootcamp);
 
@@ -218,6 +219,9 @@ const BootcampForm = ({
           />
         </Grid>
 
+        <Grid item xs={12}>
+          {error && errorMessage(error)}
+        </Grid>
         {/* <Grid
           sx={{ display: "flex", alignItems: "center", gap: 2 }}
           item
@@ -268,6 +272,7 @@ BootcampForm.propTypes = {
   onCancel: PropTypes.func,
   onBootcampFormSubmit: PropTypes.func,
   rightBtnText: PropTypes.string,
+  error: PropTypes.string,
 };
 
 BootcampForm.defaultProps = {
@@ -291,6 +296,7 @@ BootcampForm.defaultProps = {
   onCancel: () => {},
   onBootcampFormSubmit: () => {},
   rightBtnText: "",
+  error: "",
 };
 
 export default BootcampForm;

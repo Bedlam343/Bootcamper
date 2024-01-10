@@ -23,7 +23,6 @@ const Root = () => {
     };
 
     if (token && !isLoggedIn) {
-      console.log("fetching user");
       fetchUser();
     }
   }, [token, isLoggedIn, updateUserData, updateToken]);

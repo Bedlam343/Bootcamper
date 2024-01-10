@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Container,
   Paper,
@@ -7,7 +7,7 @@ import {
   Stepper,
   Typography,
 } from "@mui/material";
-import { useNavigate, useSubmit } from "react-router-dom";
+import { useActionData, useNavigate, useSubmit } from "react-router-dom";
 
 import BootcampDetails from "components/Bootcamp/Create/BootcampForm";
 import AddCourses from "components/Bootcamp/Create/AddCourses";
@@ -18,15 +18,20 @@ import { useAuth } from "store/AuthProvider";
 
 const steps = ["Bootcamp Details", "Bootcamp Courses", "Review & Publish"];
 
-// const data = {
+// const d = {
 //   bootcamp: {
 //     name: "Code Breakers",
 //     description:
 //       "Is coding your passion? Codemasters will give you the skills and the tools to become the best developer possible. We specialize in full stack web development and data science",
-//     website: "https://codemasters.com",
+//     website: "codemasters.com",
 //     phone: "(333) 333-3333",
 //     email: "enroll@codemasters.com",
 //     address: "85 South Prospect Street Burlington VT 05405",
+//     city: "Burlington",
+//     state: "Vermont",
+//     zipcode: "05405",
+//     country: "USA",
+//     street: "85 South Prospect Street",
 //     careers: ["Web Development", "Data Science", "Business"],
 //     housing: false,
 //     jobAssistance: false,
@@ -72,6 +77,7 @@ const getStepContent = (step, props) => {
     publishBootcamp,
     onBootcampFormSubmit,
     bootcamp,
+    error,
     courses,
     addCourse,
   } = props;
@@ -83,6 +89,7 @@ const getStepContent = (step, props) => {
           bootcamp={bootcamp}
           onCancel={discardBootcamp}
           onBootcampFormSubmit={onBootcampFormSubmit}
+          error={error}
           rightBtnText="Next"
         />
       );
@@ -116,11 +123,21 @@ const CreateBootcamp = () => {
     courses: [],
   });
   const [displayModal, setDisplayModal] = useState(false);
+  const [error, setError] = useState("");
 
   const { token } = useAuth();
 
   const submit = useSubmit();
   const navigate = useNavigate();
+  const actionData = useActionData();
+
+  useEffect(() => {
+    if (actionData?.error) {
+      setDisplayModal(false);
+      setError(actionData.error);
+      setActiveStep(0);
+    }
+  }, [actionData]);
 
   const { bootcamp, courses } = data;
 
@@ -137,6 +154,7 @@ const CreateBootcamp = () => {
   };
 
   const publishBootcamp = () => {
+    setError("");
     setDisplayModal(true);
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
@@ -188,6 +206,7 @@ const CreateBootcamp = () => {
     discardBootcamp,
     publishBootcamp,
     addCourse,
+    error,
     bootcamp,
     courses,
   };
