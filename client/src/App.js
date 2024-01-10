@@ -10,6 +10,7 @@ import AuthContextProvider from "store/AuthContextLayout";
 import Root, { loader as rootLoader } from "pages/Root";
 import Homepage, { loader as homeLoader } from "pages/Home";
 import LoginPage from "pages/Login";
+import SignupPage from "pages/Signup";
 import BootcampsRoot from "pages/Bootcamp/BootcampsRoot";
 import AllBootcamps, {
   loader as allBootcampsLoader,
@@ -28,6 +29,7 @@ import EditBootcampPage, {
 
 import login from "actions/login";
 import logout from "actions/logout";
+import signup from "actions/signup";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +43,7 @@ const router = createBrowserRouter(
       >
         <Route index element={<Homepage />} loader={homeLoader} />
         <Route path="login" element={<LoginPage />} action={login} />
+        <Route path="signup" element={<SignupPage />} action={signup} />
 
         <Route path="bootcamps" element={<BootcampsRoot />}>
           <Route index element={<AllBootcamps />} loader={allBootcampsLoader} />

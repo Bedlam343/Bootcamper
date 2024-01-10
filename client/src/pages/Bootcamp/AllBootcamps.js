@@ -6,8 +6,6 @@ import { getBootcamps } from "service";
 const AllBootcamps = () => {
   const bootcamps = useLoaderData();
 
-  console.log(bootcamps);
-
   const renderBootcampCards = () => {
     if (bootcamps.length > 0) {
       return <BootcampsList bootcamps={bootcamps} />;

@@ -1,6 +1,5 @@
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
@@ -12,11 +11,8 @@ import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
 import { getBootcamps } from "service";
 import { NO_IMAGE_URL } from "constants";
 
-const cards = [1, 2];
-
 const Home = () => {
   const bootcamps = useLoaderData();
-  console.log(bootcamps);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -29,7 +25,6 @@ const Home = () => {
         sx={{
           bgcolor: "background.paper",
           pt: 2,
-          pb: 6,
         }}
       >
         <Container maxWidth="sm">

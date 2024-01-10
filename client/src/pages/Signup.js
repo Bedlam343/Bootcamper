@@ -3,31 +3,13 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useActionData, useNavigate, useSubmit } from "react-router-dom";
-
-const Copyright = (props) => {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="">
-        Skilled Coders
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-};
+import { Form, NavLink, useActionData, useSubmit } from "react-router-dom";
+import { FormControl, FormLabel, Radio, RadioGroup } from "@mui/material";
 
 const errorMessage = (error) => {
   if (error) {
@@ -44,13 +26,14 @@ const errorMessage = (error) => {
   }
 };
 
-const LoginPage = () => {
+const Signup = () => {
   const submit = useSubmit();
-  const actionData = useActionData();
+  const message = useActionData();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if (data.get("role") === null) return;
     submit(data, { method: "POST" });
   };
 
@@ -68,11 +51,11 @@ const LoginPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign up
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          {/* <TextField
+        <Form onSubmit={handleSubmit} style={{ marginTop: 2 }}>
+          <TextField
             margin="dense"
             required
             fullWidth
@@ -80,7 +63,7 @@ const LoginPage = () => {
             label="Name"
             name="name"
             autoFocus
-          /> */}
+          />
           <TextField
             margin="dense"
             required
@@ -99,7 +82,7 @@ const LoginPage = () => {
             id="password"
           />
 
-          {/* <FormControl required sx={{ marginTop: "1em" }}>
+          <FormControl required sx={{ marginTop: "1em" }}>
             <FormLabel>Account Type</FormLabel>
             <RadioGroup name="role" row>
               <FormControlLabel value="user" control={<Radio />} label="User" />
@@ -109,7 +92,7 @@ const LoginPage = () => {
                 label="Publisher"
               />
             </RadioGroup>
-          </FormControl> */}
+          </FormControl>
 
           <Button
             type="submit"
@@ -117,28 +100,26 @@ const LoginPage = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
+            Sign up
           </Button>
 
           <Grid container>
             <Grid item xs>
-              <Link href="" variant="body2">
+              <NavLink to="" variant="body2">
                 Forgot password?
-              </Link>
+              </NavLink>
             </Grid>
             <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Sign Up"}
-              </Link>
+              <NavLink style={{ color: "blue" }} to="/login" variant="body2">
+                {"Sign In"}
+              </NavLink>
             </Grid>
           </Grid>
-        </Box>
-        {errorMessage(actionData?.error)}
+        </Form>
+        {errorMessage(message)}
       </Box>
-
-      <Copyright sx={{ mt: 8, mb: 4 }} />
     </Container>
   );
 };
 
-export default LoginPage;
+export default Signup;
