@@ -81,18 +81,20 @@ const BootcampDetails = ({ bootcamp, courses, canEdit }) => {
             </Grid>
           )}
 
-          <Grid item xs={12}>
-            <Typography
-              sx={{ textTransform: "uppercase" }}
-              fontSize="18px"
-              align="center"
-            >
-              Careers:
-            </Typography>
-            <Typography fontSize="16px" align="center">
-              {bootcamp.careers.join(", ")}
-            </Typography>
-          </Grid>
+          {bootcamp.careers?.length > 0 && (
+            <Grid item xs={12}>
+              <Typography
+                sx={{ textTransform: "uppercase" }}
+                fontSize="18px"
+                align="center"
+              >
+                Careers:
+              </Typography>
+              <Typography fontSize="16px" align="center">
+                {bootcamp.careers.join(", ")}
+              </Typography>
+            </Grid>
+          )}
 
           <Grid
             container
@@ -135,14 +137,17 @@ const BootcampDetails = ({ bootcamp, courses, canEdit }) => {
             )}
           </Grid>
 
-          <Grid item xs={12} justifyContent="center">
-            <Typography variant="h6" align="center">
-              Located at:
-            </Typography>
-            <Typography sx={{ textTransform: "uppercase" }} align="center">
-              {bootcamp.address}
-            </Typography>
-          </Grid>
+          {bootcamp.address ||
+            (bootcamp.location?.formattedAddress && (
+              <Grid item xs={12} justifyContent="center">
+                <Typography variant="h6" align="center">
+                  Located at:
+                </Typography>
+                <Typography sx={{ textTransform: "uppercase" }} align="center">
+                  {bootcamp.address || bootcamp.location?.formattedAddress}
+                </Typography>
+              </Grid>
+            ))}
 
           <Grid item xs={12}>
             {bootcamp.averageRating && (

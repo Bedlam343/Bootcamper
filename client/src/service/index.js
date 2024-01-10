@@ -6,10 +6,14 @@ export const getBootcamp = (bootcampId) => {
   return axios.get(`/api/v1/bootcamps/${bootcampId}`);
 };
 
-export const getBootcamps = async () => {
+export const getBootcamps = async (params = {}) => {
   let bootcamps = [];
   try {
-    const response = await axios.get(`/api/v1/bootcamps`);
+    const response = await axios.get(`/api/v1/bootcamps`, {
+      params: {
+        limit: params.limit,
+      },
+    });
     bootcamps = response.data.data;
   } catch (error) {
     console.log(error);
@@ -56,15 +60,11 @@ export const getCoursesForBootcamp = (bootcampId) => {
 };
 
 export const createCourse = (course, bootcampId, token) => {
-  return axios.post(
-    `/api/v1/bootcamps/${bootcampId}/courses`,
-    course,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  return axios.post(`/api/v1/bootcamps/${bootcampId}/courses`, course, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 // AUTH

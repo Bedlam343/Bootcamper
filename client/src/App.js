@@ -8,7 +8,7 @@ import {
 import AuthContextProvider from "store/AuthContextLayout";
 
 import Root, { loader as rootLoader } from "pages/Root";
-import Homepage from "components/Homepage";
+import Homepage, { loader as homeLoader } from "pages/Home";
 import LoginPage from "pages/Login";
 import BootcampsRoot from "pages/Bootcamp/BootcampsRoot";
 import AllBootcamps, {
@@ -39,7 +39,7 @@ const router = createBrowserRouter(
         path="/"
         element={<Root />}
       >
-        <Route index element={<Homepage />} />
+        <Route index element={<Homepage />} loader={homeLoader} />
         <Route path="login" element={<LoginPage />} action={login} />
 
         <Route path="bootcamps" element={<BootcampsRoot />}>
@@ -71,81 +71,5 @@ const router = createBrowserRouter(
 const App = () => {
   return <RouterProvider router={router} />;
 };
-
-// const router = createBrowserRouter([
-//   {
-//     // provide AuthContext to all routes
-//     element: <AuthContextLayout />,
-//     children: [
-//       {
-//         path: "/",
-//         element: <RootLayout />,
-//         id: "root",
-//         children: [
-//           { index: true, element: <HomePage /> },
-//           {
-//             path: "bootcamps",
-//             element: <BootcampsRootLayout />,
-//             id: "bootcampsRoot",
-//             loader: bootcampsLoader,
-//             children: [
-//               {
-//                 index: true,
-//                 element: <BootcampsPage />,
-//               },
-//               {
-//                 path: ":bootcampId",
-//                 element: <BootcampDetailLayout />,
-//                 id: "bootcampDetail",
-//                 loader: bootcampLoader,
-//                 children: [
-//                   {
-//                     index: true,
-//                     element: <BootcampDetailPage />,
-//                     action: deleteBootcampAction,
-//                   },
-//                   {
-//                     path: "edit",
-//                     element: <EditBootcampPage />,
-//                     action: editAction,
-//                   },
-//                   {
-//                     path: "new-bootcamp-courses",
-//                     element: <AddCoursesPage />,
-//                     loader: coursesLoader,
-//                     action: coursesAction,
-//                   },
-//                 ],
-//               },
-//               {
-//                 path: "new",
-//                 element: <NewBootcampPage />,
-//                 action: newBootcampAction,
-//               },
-//             ],
-//           },
-//           {
-//             path: "login",
-//             element: <LoginPage />,
-//             action: authAction,
-//           },
-//           {
-//             path: "signup",
-//             element: <SignupPage />,
-//             action: signupAction,
-//           },
-//           {
-//             path: "logout",
-//             action: logoutAction,
-//           },
-//         ],
-//       },
-//     ],
-//   },
-// ]);
-
-// const App = () => {
-//   return <RouterProvider router={router} />;
-// };
 
 export default App;
