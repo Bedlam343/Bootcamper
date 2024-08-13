@@ -1,6 +1,6 @@
-# DevCamper API
+# Codemasons
 
-> Backend API for DevCamper application, which is a bootcmap directory website
+> Coding the web one line at a time.
 
 ## Usage
 
@@ -13,6 +13,7 @@ npm install
 ```
 
 Again inside client folder
+
 ```
 npm install
 ```
@@ -26,3 +27,4 @@ npm run dev
 
 - Version: 1.0.0
 - License: MIT
+```
