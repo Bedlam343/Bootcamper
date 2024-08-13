@@ -1,22 +1,22 @@
-import React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink, useSubmit } from "react-router-dom";
+import React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import { NavLink, useSubmit } from 'react-router-dom';
 
-import BootcampsDropdown from "components/Bootcamp/Dropdown";
-import { useAuth } from "store/AuthProvider";
+import BootcampsDropdown from 'components/Bootcamp/Dropdown';
+import { useAuth } from 'store/AuthProvider';
 
 const MainNavigation = () => {
   const { isLoggedIn } = useAuth();
   const submit = useSubmit();
 
   const handleLogout = () => {
-    submit({}, { method: "POST" });
+    submit({}, { method: 'POST' });
   };
 
   const loginOrLogoutButton = () => {
@@ -29,7 +29,7 @@ const MainNavigation = () => {
     }
     return (
       <Button color="inherit">
-        <NavLink to="/login" style={{ color: "white", textDecoration: "none" }}>
+        <NavLink to="/login" style={{ color: 'white', textDecoration: 'none' }}>
           Login
         </NavLink>
       </Button>
@@ -37,8 +37,8 @@ const MainNavigation = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, mb: "6em" }}>
-      <AppBar sx={{ position: "fixed", top: 0 }}>
+    <Box sx={{ flexGrow: 1, mb: '6em' }}>
+      <AppBar sx={{ position: 'fixed', top: 0 }}>
         <Toolbar>
           <IconButton
             size="large"
@@ -50,10 +50,10 @@ const MainNavigation = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            SKILLED CODERS
+            Codemasons
           </Typography>
           <Button color="inherit">
-            <NavLink to="/" style={{ color: "white", textDecoration: "none" }}>
+            <NavLink to="/" style={{ color: 'white', textDecoration: 'none' }}>
               Home
             </NavLink>
           </Button>

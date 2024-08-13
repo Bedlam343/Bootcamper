@@ -1,29 +1,29 @@
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { NavLink, useLoaderData, useNavigate } from "react-router-dom";
-import { getBootcamps } from "service";
-import { NO_IMAGE_URL } from "constants";
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { NavLink, useLoaderData, useNavigate } from 'react-router-dom';
+import { getBootcamps } from 'service';
+import { NO_IMAGE_URL } from 'constants';
 
 const Home = () => {
   const bootcamps = useLoaderData();
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/bootcamps");
+    navigate('/bootcamps');
   };
 
   return (
     <>
       <Box
         sx={{
-          bgcolor: "background.paper",
+          bgcolor: 'background.paper',
           pt: 2,
         }}
       >
@@ -35,7 +35,7 @@ const Home = () => {
             color="text.primary"
             gutterBottom
           >
-            Skilled Coders
+            Codemasons
           </Typography>
           <Typography
             variant="h5"
@@ -43,7 +43,7 @@ const Home = () => {
             color="text.secondary"
             paragraph
           >
-            Our mission at Skilled Coders is to provide you with the best coding
+            Our mission at Codemasons is to provide you with the best coding
             knowledge out there. We bring you the best bootcamps, with the best
             courses, to allow you to puruse your dream of becoming a top-notch
             programmer.
@@ -66,21 +66,21 @@ const Home = () => {
           {bootcamps.map((bootcamp) => (
             <Grid item key={bootcamp._id} xs={12} sm={6} md={4}>
               <NavLink
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: 'none' }}
                 to={`/bootcamps/${bootcamp._id}`}
               >
                 <Card
                   sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
                   }}
                 >
                   <CardMedia
                     component="div"
                     sx={{
                       // 16:9
-                      pt: "56.25%",
+                      pt: '56.25%',
                     }}
                     image={bootcamp.photo || NO_IMAGE_URL}
                   />
