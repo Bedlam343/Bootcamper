@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         themeBlue: '#A7B7C6',
         easyWhite: '#EBEBEB',
+        lightBlack: '#1E1E1E',
         themeOrange: '#FF8E00',
       },
     },

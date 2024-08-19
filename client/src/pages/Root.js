@@ -1,10 +1,9 @@
-import { Outlet, useActionData, useLoaderData } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Outlet, useActionData, useLoaderData } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-import MainNavigation from "components/MainNavigation";
-import { useAuth } from "store/AuthProvider";
-import { getMe } from "service";
-import { CssBaseline } from "@mui/material";
+import MainNavigation from 'components/MainNavigation';
+import { useAuth } from 'store/AuthProvider';
+import { getMe } from 'service';
 
 const Root = () => {
   const token = useLoaderData();
@@ -29,14 +28,13 @@ const Root = () => {
 
   useEffect(() => {
     if (isLogout === true) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
       logout();
     }
   }, [isLogout, logout]);
 
   return (
     <>
-      {/* <CssBaseline /> */}
       <MainNavigation />
       <Outlet />
     </>
@@ -44,7 +42,7 @@ const Root = () => {
 };
 
 export const loader = () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem('token');
   return token;
 };
 
