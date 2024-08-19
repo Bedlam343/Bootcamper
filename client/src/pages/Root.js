@@ -36,7 +36,7 @@ const Root = () => {
 
   return (
     <>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <MainNavigation />
       <Outlet />
     </>
