@@ -31,6 +31,17 @@ const Homepage = ({ bootcamps }) => {
       <canvas ref={triangleSize3Ref} className="block absolute" />
       <canvas ref={triangleSize2Ref} className="block absolute" />
       <canvas ref={triangleSize1Ref} className="block absolute" />
+      <div className="absolute w-full flex flex-col items-center gap-8 pt-4">
+        <div className="flex flex-col items-center">
+          <p className="text-easyWhite text-[80px]">Become a Digital</p>
+          <p className="text-easyWhite text-[80px]">Craftsman.</p>
+        </div>
+        <img
+          src="./assets/hammer.png"
+          alt="Codemasons Logo"
+          className="w-[130px] animate-hammer-swing"
+        />
+      </div>
     </div>
   );
 };
