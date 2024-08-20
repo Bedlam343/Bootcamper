@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         kellySlab: ['Kelly Slab', 'sans-serif'],
         cairo: ['Cairo', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
       },
       keyframes: {
         hammerSwing: {
