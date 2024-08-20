@@ -6,7 +6,7 @@ const drawTriangle = (triangleRef, bottomY, fillColor) => {
   canvas.height = bottomY;
 
   // Define the points of the triangle
-  const width = canvas.width;
+  const width = canvas.width - 17;
   const height = canvas.height;
   const middleX = width / 2;
   // const bottomY = height / 2;
