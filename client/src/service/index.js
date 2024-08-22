@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // BOOTCAMPS
 
@@ -7,6 +7,7 @@ export const getBootcamp = (bootcampId) => {
 };
 
 export const getBootcamps = async (params = {}) => {
+  console.log('getboocamps');
   let bootcamps = [];
   try {
     const response = await axios.get(`/api/v1/bootcamps`, {
@@ -30,7 +31,7 @@ export const getMyBootcamps = (userId, token) => {
 };
 
 export const createBootcamp = (bootcamp, token) => {
-  return axios.post("/api/v1/bootcamps", bootcamp, {
+  return axios.post('/api/v1/bootcamps', bootcamp, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -6,7 +6,7 @@ const Homepage = ({ bootcamps }) => {
 
   return (
     <>
-      <div className="bg-easyWhite pb-14">
+      <div className="bg-easyWhite pb-14 grid grid-cols-">
         {/* title and hammer */}
         <div
           className="top-[70px] w-[100%] sm:hidden border-b-2 border-[#e1e1e1] 
@@ -28,7 +28,7 @@ const Homepage = ({ bootcamps }) => {
         </div>
 
         <div
-          className="flex flex-col sm:flex-row h-auto pt-4 pb-10 sm:pt-0 
+          className="flex flex-col justify-center sm:flex-row h-auto pt-4 pb-10 sm:pt-0 
           sm:mt-[0px] gap-12 sm:gap-0 border-b-2 border-[#e1e1e1] sm:border-none"
         >
           <div className="flex flex-col items-center px-8 gap-4 justify-end w-[100%] sm:w-[30%]">
@@ -123,7 +123,7 @@ const Homepage = ({ bootcamps }) => {
 
           <div className="grid justify-center lg:grid-cols-2 mt-16 gap-y-14 w-[100%] gap-x-8">
             {bootcamps.map((bootcamp) => (
-              <div className="w-[450px] h-auto pb-4 bg-white rounded-[25px]">
+              <div className="max-w-[450px] h-auto pb-4 bg-white rounded-[25px]">
                 <img
                   src={bootcamp.photo}
                   alt="Bootcamp"
@@ -170,7 +170,7 @@ const Homepage = ({ bootcamps }) => {
         </div>
 
         <div className="h-[2px] w-[100%] bg-[#292929]" />
-        <div className="py-10 font-cairo text-[#7d7d7d] text-center text-[14px] font-semibold">
+        <div className="py-10 font-cairo text-[#7d7d7d] text-center text-[14px] font-semibold px-8">
           <p className="">Copyright @ 2024, Codemasons.</p>
           <p>Codemasons is licensed by the Accepted Rite of Codemasonry.</p>
         </div>
