@@ -110,7 +110,7 @@ const Homepage = ({ bootcamps }) => {
       </div>
 
       <div className="bg-black w-[100%] flex items-center flex-col">
-        <div className="py-12 max-w-[1000px]">
+        <div className="py-12 max-w-[1000px] flex flex-col items-center px-8">
           <p className="text-center font-kellySlab text-white text-[18px]">
             Codemasons
           </p>
@@ -121,13 +121,13 @@ const Homepage = ({ bootcamps }) => {
             <span className="text-themeBlue">magic</span> happen...
           </p>
 
-          <div className="grid grid-cols-2 mt-16 gap-y-14">
+          <div className="grid justify-center lg:grid-cols-2 mt-16 gap-y-14 w-[100%] gap-x-8">
             {bootcamps.map((bootcamp) => (
               <div className="w-[450px] h-auto pb-4 bg-white rounded-[25px]">
                 <img
                   src={bootcamp.photo}
                   alt="Bootcamp"
-                  className="w-[450px] h-[150px] rounded-t-[25px] object-cover"
+                  className="w-[455px] h-[150px] rounded-t-[25px] object-cover"
                 />
                 <div className="pt-4 px-4">
                   <div className="flex justify-between items-end flex-wrap">
@@ -144,7 +144,7 @@ const Homepage = ({ bootcamps }) => {
                   <div className="flex justify-end mt-4">
                     <button
                       className="rounded-[15px] w-[90px] h-[45px] bg-lightBlack 
-                      hover:bg-[#3c3c3c] flex items-center justify-center"
+                      hover:bg-[#383838] flex items-center justify-center"
                     >
                       <p className="text-white uppercase">Details</p>
                     </button>
@@ -162,7 +162,7 @@ const Homepage = ({ bootcamps }) => {
           <div className="flex justify-center mt-12">
             <button
               className="rounded-lg w-[120px]  h-[55px] bg-white 
-                      flex items-center justify-center"
+                      flex items-center justify-center hover:bg-[#e6e6e6]"
             >
               <p className="text-lightBlack uppercase">Explore</p>
             </button>
