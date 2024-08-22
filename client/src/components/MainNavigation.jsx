@@ -48,24 +48,28 @@ const MainNavigation = () => {
         <img
           src="./assets/hammer.png"
           alt="Codemason Logo"
-          className="w-[40px] sm:w-[55px]"
+          className="w-[40px] sm:w-[45px] lg:w-[55px]"
         />
-        <p className="text-themeBlue text-2xl sm:text-4xl font-kellySlab">
+        <p className="text-themeBlue text-2xl lg:text-4xl font-kellySlab">
           Codemasons
         </p>
       </div>
 
-      {windowWidth >= 640 ? (
+      {windowWidth >= 768 ? (
         // List of Links
         <>
-          <ul className="text-easyWhite font-cairo font-semibold flex justify-evenly text-md uppercase min-w-[600px]">
-            <li className="hover:cursor-pointer hover:text-themeBlue">
+          <ul className="text-easyWhite font-cairo font-semibold flex justify-evenly text-md uppercase min-w-[350px] lg:min-w-[450px] xl:min-w-[600px]">
+            <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
               Programs
             </li>
-            <li className="hover:cursor-pointer hover:text-themeBlue">Teach</li>
-            <li className="hover:cursor-pointer hover:text-themeBlue">About</li>
+            <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
+              Teach
+            </li>
+            <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
+              About
+            </li>
           </ul>
-          <button className="rounded-lg w-[120px] h-[50px] bg-themeOrange hover:bg-themeBlue flex items-center justify-center">
+          <button className="rounded-lg w-[90px] lg:w-[120px] h-[45px] lg:h-[50px] bg-themeOrange hover:bg-themeBlue flex items-center justify-center">
             <p className="text-white uppercase">Sign Up</p>
           </button>
         </>

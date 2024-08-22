@@ -40,10 +40,6 @@ const Homepage = ({ bootcamps }) => {
     };
 
     drawTriangles();
-
-    window.addEventListener('resize', drawTriangles);
-
-    return () => window.removeEventListener('resize', drawTriangles);
   }, [windowWidth]);
 
   return (
@@ -57,19 +53,22 @@ const Homepage = ({ bootcamps }) => {
           <canvas ref={triangleSize1Ref} className="block absolute" />
 
           {/* Title and Hammer */}
-          <div className="sm:absolute sm:w-full flex flex-col items-center gap-8 pt-4 pb-12 sm:pb-0">
+          <div
+            className="sm:absolute sm:w-full flex flex-col items-center gap-8 
+            sm:gap-16 md:gap-12 lg:gap-8 pt-4 sm:pt-12 md:pt-8 lg:pt-4 pb-12 sm:pb-0"
+          >
             <div className="flex flex-col items-center px-6 sm:px-0">
-              <p className="text-lightBlack sm:text-easyWhite text-[50px] sm:text-[80px] text-center">
+              <p className="text-lightBlack sm:text-easyWhite text-[50px] md:text-[60px] lg:text-[80px] text-center">
                 Become a Digital
               </p>
-              <p className="text-lightBlack sm:text-easyWhite text-[50px] sm:text-[80px] text-center">
+              <p className="text-lightBlack sm:text-easyWhite text-[50px] md:text-[60px] lg:text-[80px] text-center">
                 Craftsman.
               </p>
             </div>
             <img
               src="./assets/hammer.png"
               alt="Codemasons Logo"
-              className="w-[120px] sm:w-[130px] animate-hammer-swing"
+              className="w-[100px] md:w-[115px] lg:w-[130px] animate-hammer-swing"
             />
           </div>
         </div>
@@ -77,7 +76,7 @@ const Homepage = ({ bootcamps }) => {
         {/* Reviews */}
         {windowWidth >= 640 ? (
           <>
-            <div className="flex sm:h-[560px]">
+            <div className="flex h-[560px]">
               <div className="w-[50%] flex items-center flex-col">
                 <div className="h-[50%] w-[100%]" />
 
@@ -88,11 +87,17 @@ const Homepage = ({ bootcamps }) => {
                       alt="Reviewier 1"
                       className="object-cover h-[125px] w-[125px] rounded-full"
                     />
-                    <p className="text-center font-inter text-[14px]">
+                    <p
+                      className="text-center font-inter text-[14px] sm:text-[12px] 
+                      md:text-[13px] lg:text-[14px]"
+                    >
                       "Codemasons gave me the secrets to unlock my greatest and
                       hidden potential."
                     </p>
-                    <p className="text-center font-inter uppercase text-[#3D3D3D] text-[12px]">
+                    <p
+                      className="text-center font-inter uppercase text-[#3D3D3D] 
+                      text-[12px] sm:text-[10px] md:text-[11px] lg:text-[12px]"
+                    >
                       Jagjit Singh - 3rd Degree Codemason
                     </p>
                   </div>
@@ -112,12 +117,18 @@ const Homepage = ({ bootcamps }) => {
                       alt="Reviewier 1"
                       className="object-cover h-[125px] w-[125px] rounded-full"
                     />
-                    <p className="text-center font-inter text-[14px]">
+                    <p
+                      className="text-center font-inter text-[14px] sm:text-[12px] 
+                      md:text-[13px] lg:text-[14px]"
+                    >
                       "I had almost given up on coding, and then I discovered
                       Codemasons. Now, I am a code-magician. I swear, these
                       people practice witchcraft."
                     </p>
-                    <p className="text-center font-inter uppercase text-[#3D3D3D] text-[12px]">
+                    <p
+                      className="text-center font-inter uppercase text-[#3D3D3D] 
+                      text-[12px] sm:text-[10px] md:text-[11px] lg:text-[12px]"
+                    >
                       Anonymous
                     </p>
                   </div>
@@ -162,7 +173,7 @@ const Homepage = ({ bootcamps }) => {
 
         <div className="pt-10 px-6 sm:px-0 sm:mt-14 sm:pt-0 flex justify-center">
           <div className="sm:w-[45%]">
-            <p className="font-inter text-center text-[24px] sm:text-[36px] font-medium italic">
+            <p className="font-inter text-center text-[24px] md:text-[36px] font-medium italic">
               We don't just create programmers, we create{' '}
               <span className="text-themeOrange">digital craftsmen</span>.
             </p>
