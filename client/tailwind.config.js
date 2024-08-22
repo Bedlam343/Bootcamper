@@ -11,12 +11,12 @@ module.exports = {
       keyframes: {
         hammerSwing: {
           '0%': { transform: 'rotate(25deg)' },
-          '75%': { transform: 'rotate(-75deg)' },
+          '80%': { transform: 'rotate(-75deg)' },
           '100%': { transform: 'rotate(25deg)' },
         },
       },
       animation: {
-        'hammer-swing': 'hammerSwing 4s ease-in-out infinite',
+        'hammer-swing': 'hammerSwing 3s ease-in-out infinite',
       },
       colors: {
         themeBlue: '#A7B7C6',

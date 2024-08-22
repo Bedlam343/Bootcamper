@@ -43,7 +43,10 @@ const MainNavigation = () => {
   };
 
   return (
-    <div className="w-full py-3 pl-6 pr-10 sm:px-0 sm:py-4 bg-[#000000] flex items-center justify-between sm:justify-evenly">
+    <div
+      className="w-full py-3 pl-6 pr-10 sm:px-0 sm:py-4 bg-[#000000] 
+      flex items-center justify-between sm:justify-evenly"
+    >
       <div className="flex gap-2 items-center justify-center hover:cursor-pointer">
         <img
           src="./assets/hammer.png"

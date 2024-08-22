@@ -1,67 +1,68 @@
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import drawTriangle from 'components/utils/drawTriangle';
-import clearTriangle from './utils/clearTriangle';
 
 const Homepage = ({ bootcamps }) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const triangleSize1Ref = useRef();
-  const triangleSize2Ref = useRef();
-  const triangleSize3Ref = useRef();
-  const triangleSize4Ref = useRef();
-
-  // update state when window size changes
-  useEffect(() => {
-    const updateWindowWith = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', updateWindowWith);
-
-    return () => window.removeEventListener('resize', updateWindowWith);
-  }, []);
-
-  // draw 4 upside-down triangles
-  useEffect(() => {
-    if (windowWidth < 640) {
-      // delete triangles if screen width is small
-      clearTriangle(triangleSize1Ref);
-      clearTriangle(triangleSize2Ref);
-      clearTriangle(triangleSize3Ref);
-      clearTriangle(triangleSize4Ref);
-      return;
-    }
-
-    const drawTriangles = () => {
-      drawTriangle(triangleSize1Ref, 500, '#1E1E1E');
-      drawTriangle(triangleSize2Ref, 520, '#595959');
-      drawTriangle(triangleSize3Ref, 540, '#969696');
-      drawTriangle(triangleSize4Ref, 560, '#D6D5D5');
-    };
-
-    drawTriangles();
-  }, [windowWidth]);
+  console.log(bootcamps);
 
   return (
     <>
       <div className="bg-easyWhite pb-14">
-        {/* Upside-down triangles */}
-        <div className="border-b-2 border-gray-300 sm:border-none">
-          <canvas ref={triangleSize4Ref} className="block absolute" />
-          <canvas ref={triangleSize3Ref} className="block absolute" />
-          <canvas ref={triangleSize2Ref} className="block absolute" />
-          <canvas ref={triangleSize1Ref} className="block absolute" />
+        {/* title and hammer */}
+        <div
+          className="top-[70px] w-[100%] sm:hidden border-b-2 border-[#e1e1e1] 
+            flex flex-col items-center gap-8 pt-4 sm:pt-12 pb-12"
+        >
+          <div className="flex flex-col items-center px-8">
+            <p className="text-lightBlack text-[50px] text-center">
+              Become a Digital
+            </p>
+            <p className="text-lightBlack  text-[50px] text-center">
+              Craftsman.
+            </p>
+          </div>
+          <img
+            src="./assets/hammer.png"
+            alt="Codemasons Logo"
+            className="w-[100px] sm:w-[0px] animate-hammer-swing sm:animate-none"
+          />
+        </div>
 
-          {/* Title and Hammer */}
+        <div
+          className="flex flex-col sm:flex-row h-auto pt-4 pb-10 sm:pt-0 
+          sm:mt-[0px] gap-12 sm:gap-0 border-b-2 border-[#e1e1e1] sm:border-none"
+        >
+          <div className="flex flex-col items-center px-8 gap-4 justify-end w-[100%] sm:w-[30%]">
+            <img
+              src="./assets/reviewer1.jpg"
+              alt="Reviewier 1"
+              className="object-cover h-[125px] w-[125px] rounded-full"
+            />
+            <p
+              className="text-center font-inter text-[14px] sm:text-[12px] 
+                      md:text-[13px] lg:text-[14px]"
+            >
+              "Codemasons gave me the secrets to unlock my greatest and hidden
+              potential."
+            </p>
+            <p
+              className="text-center font-inter uppercase text-[#3D3D3D] 
+                      text-[12px] sm:text-[10px] md:text-[11px] lg:text-[12px]"
+            >
+              Jagjit Singh - 3rd Degree Codemason
+            </p>
+          </div>
+
+          {/* title and hammer */}
           <div
-            className="sm:absolute sm:w-full flex flex-col items-center gap-8 
-            sm:gap-16 md:gap-12 lg:gap-8 pt-4 sm:pt-12 md:pt-8 lg:pt-4 pb-12 sm:pb-0"
+            className="hidden sm:w-auto sm:relative sm:flex flex-col 
+            items-center gap-8 sm:gap-16 md:gap-12 lg:gap-8 pt-4 sm:pt-12 
+            md:pt-8 lg:pt-4 pb-12 sm:pb-0"
           >
             <div className="flex flex-col items-center px-6 sm:px-0">
-              <p className="text-lightBlack sm:text-easyWhite text-[50px] md:text-[60px] lg:text-[80px] text-center">
+              <p className="text-lightBlack  text-[50px] md:text-[60px] lg:text-[80px] text-center">
                 Become a Digital
               </p>
-              <p className="text-lightBlack sm:text-easyWhite text-[50px] md:text-[60px] lg:text-[80px] text-center">
+              <p className="text-lightBlack  text-[50px] md:text-[60px] lg:text-[80px] text-center">
                 Craftsman.
               </p>
             </div>
@@ -71,107 +72,34 @@ const Homepage = ({ bootcamps }) => {
               className="w-[100px] md:w-[115px] lg:w-[130px] animate-hammer-swing"
             />
           </div>
+
+          <div
+            className="flex flex-col items-center pl-9 pr-12 gap-4 
+            justify-end w-[100%] sm:w-[30%]"
+          >
+            <img
+              src="./assets/reviewer2.png"
+              alt="Reviewier 1"
+              className="object-cover h-[125px] w-[125px] rounded-full"
+            />
+            <p
+              className="text-center font-inter text-[14px] sm:text-[12px] 
+                      md:text-[13px] lg:text-[14px]"
+            >
+              "I had almost given up on coding, and then I discovered
+              Codemasons. Now, I am a code-magician. I swear, these people
+              practice witchcraft."
+            </p>
+            <p
+              className="text-center font-inter uppercase text-[#3D3D3D] 
+                      text-[12px] sm:text-[10px] md:text-[11px] lg:text-[12px]"
+            >
+              Anonymous
+            </p>
+          </div>
         </div>
 
-        {/* Reviews */}
-        {windowWidth >= 640 ? (
-          <>
-            <div className="flex h-[560px]">
-              <div className="w-[50%] flex items-center flex-col">
-                <div className="h-[50%] w-[100%]" />
-
-                <div className="h-[50%] w-[100%] flex">
-                  <div className="w-[60%] flex flex-col items-center px-8 gap-4">
-                    <img
-                      src="./assets/reviewer1.jpg"
-                      alt="Reviewier 1"
-                      className="object-cover h-[125px] w-[125px] rounded-full"
-                    />
-                    <p
-                      className="text-center font-inter text-[14px] sm:text-[12px] 
-                      md:text-[13px] lg:text-[14px]"
-                    >
-                      "Codemasons gave me the secrets to unlock my greatest and
-                      hidden potential."
-                    </p>
-                    <p
-                      className="text-center font-inter uppercase text-[#3D3D3D] 
-                      text-[12px] sm:text-[10px] md:text-[11px] lg:text-[12px]"
-                    >
-                      Jagjit Singh - 3rd Degree Codemason
-                    </p>
-                  </div>
-
-                  <div className="w-[40%]" />
-                </div>
-              </div>
-
-              <div className="w-[50%] flex items-center flex-col">
-                <div className="h-[50%] w-[100%]" />
-
-                <div className="h-[50%] w-[100%] flex">
-                  <div className="w-[40%]" />
-                  <div className="w-[60%] flex flex-col items-center pl-9 pr-12 gap-4">
-                    <img
-                      src="./assets/reviewer2.png"
-                      alt="Reviewier 1"
-                      className="object-cover h-[125px] w-[125px] rounded-full"
-                    />
-                    <p
-                      className="text-center font-inter text-[14px] sm:text-[12px] 
-                      md:text-[13px] lg:text-[14px]"
-                    >
-                      "I had almost given up on coding, and then I discovered
-                      Codemasons. Now, I am a code-magician. I swear, these
-                      people practice witchcraft."
-                    </p>
-                    <p
-                      className="text-center font-inter uppercase text-[#3D3D3D] 
-                      text-[12px] sm:text-[10px] md:text-[11px] lg:text-[12px]"
-                    >
-                      Anonymous
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="flex flex-col py-10 pb-4 gap-8">
-            <div className="flex flex-col items-center px-8 gap-4">
-              <img
-                src="./assets/reviewer1.jpg"
-                alt="Reviewier 1"
-                className="object-cover h-[125px] w-[125px] rounded-full"
-              />
-              <p className="text-center font-inter text-[14px] text-lightBlack">
-                "Codemasons gave me the secrets to unlock my greatest and hidden
-                potential."
-              </p>
-              <p className="text-center font-inter uppercase text-[#3D3D3D] text-[12px]">
-                Jagjit Singh - 3rd Degree Codemason
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center px-8 gap-6">
-              <img
-                src="./assets/reviewer2.png"
-                alt="Reviewier 1"
-                className="object-cover h-[125px] w-[125px] rounded-full"
-              />
-              <p className="text-center font-inter text-[14px] text-lightBlack">
-                "I had almost given up on coding, and then I discovered
-                Codemasons. Now, I am a code-magician. I swear, these people
-                practice witchcraft."
-              </p>
-              <p className="text-center font-inter uppercase text-[#3D3D3D] text-[12px]">
-                Anonymous
-              </p>
-            </div>
-          </div>
-        )}
-
-        <div className="pt-10 px-6 sm:px-0 sm:mt-14 sm:pt-0 flex justify-center">
+        <div className="pt-12 sm:pt-10 px-8 sm:px-0 flex justify-center">
           <div className="sm:w-[45%]">
             <p className="font-inter text-center text-[24px] md:text-[36px] font-medium italic">
               We don't just create programmers, we create{' '}
@@ -181,8 +109,71 @@ const Homepage = ({ bootcamps }) => {
         </div>
       </div>
 
-      <div className="bg-lightBlack w-[100%] py-12 text-[18px]">
-        <p className="text-center font-kellySlab text-white">Codemasons</p>
+      <div className="bg-black w-[100%] flex items-center flex-col">
+        <div className="py-12 max-w-[1000px]">
+          <p className="text-center font-kellySlab text-white text-[18px]">
+            Codemasons
+          </p>
+          <p className="font-inter text-4xl text-easyWhite text-center mt-10">
+            Our programs equip you with the{' '}
+            <span className="text-themeBlue">knowledge</span> and{' '}
+            <span className="text-themeBlue">tools</span> to make{' '}
+            <span className="text-themeBlue">magic</span> happen...
+          </p>
+
+          <div className="grid grid-cols-2 mt-16 gap-y-14">
+            {bootcamps.map((bootcamp) => (
+              <div className="w-[450px] h-auto pb-4 bg-white rounded-[25px]">
+                <img
+                  src={bootcamp.photo}
+                  alt="Bootcamp"
+                  className="w-[450px] h-[150px] rounded-t-[25px] object-cover"
+                />
+                <div className="pt-4 px-4">
+                  <div className="flex justify-between items-end flex-wrap">
+                    <p className="font-cairo font-semibold text-2xl">
+                      {bootcamp.name}
+                    </p>
+                    <p className="font-cairo text-[#505050] text-[15px]">
+                      Average Cost: ${bootcamp.averageCost}
+                    </p>
+                  </div>
+
+                  <p className="font-cairo mt-2">{bootcamp.description}</p>
+
+                  <div className="flex justify-end mt-4">
+                    <button
+                      className="rounded-[15px] w-[90px] h-[45px] bg-lightBlack 
+                      hover:bg-[#3c3c3c] flex items-center justify-center"
+                    >
+                      <p className="text-white uppercase">Details</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-white font-kellySlab text-3xl text-center mt-20">
+            Start exploring and begin your journey of becoming a{' '}
+            <span className="text-themeBlue">Codemason</span>
+          </p>
+
+          <div className="flex justify-center mt-12">
+            <button
+              className="rounded-lg w-[120px]  h-[55px] bg-white 
+                      flex items-center justify-center"
+            >
+              <p className="text-lightBlack uppercase">Explore</p>
+            </button>
+          </div>
+        </div>
+
+        <div className="h-[2px] w-[100%] bg-[#292929]" />
+        <div className="py-10 font-cairo text-[#7d7d7d] text-center text-[14px] font-semibold">
+          <p className="">Copyright @ 2024, Codemasons.</p>
+          <p>Codemasons is licensed by the Accepted Rite of Codemasonry.</p>
+        </div>
       </div>
     </>
   );
