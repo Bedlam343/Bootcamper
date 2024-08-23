@@ -4,6 +4,6 @@
 
 html,
 body {
-  overflow-x: hidden;
-  background-color: #ebebeb;
+  background-color: black;
+  height: 100%;
 }

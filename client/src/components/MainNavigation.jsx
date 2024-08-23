@@ -24,8 +24,8 @@ const MainNavigation = () => {
 
   return (
     <div
-      className="w-full py-3 pl-6 pr-10 sm:px-0 sm:py-4 bg-[#000000] 
-      flex items-center justify-between sm:justify-evenly"
+      className="z-50 w-full py-3 pl-6 pr-10 sm:px-0 sm:py-4 bg-[#000000] 
+      flex items-center justify-between sm:justify-evenly border-b-[1px] border-[#575757]"
     >
       <NavLink to="/">
         <div className="flex gap-2 items-center justify-center hover:cursor-pointer">

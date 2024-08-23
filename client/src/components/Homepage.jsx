@@ -2,11 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Homepage = ({ bootcamps }) => {
-  console.log(bootcamps);
-
   return (
     <>
-      <div className="bg-easyWhite pb-14 grid grid-cols-">
+      <div className="bg-easyWhite pb-14 grid grid-cols-1">
         {/* title and hammer */}
         <div
           className="top-[70px] w-[100%] sm:hidden border-b-2 border-[#e1e1e1] 
@@ -160,17 +158,21 @@ const Homepage = ({ bootcamps }) => {
           </p>
 
           <div className="flex justify-center mt-12">
-            <button
-              className="rounded-lg w-[120px]  h-[55px] bg-white 
+            <NavLink to="/programs">
+              <button
+                className="rounded-lg w-[120px]  h-[55px] bg-white 
                       flex items-center justify-center hover:bg-[#e6e6e6]"
-            >
-              <p className="text-lightBlack uppercase">Explore</p>
-            </button>
+              >
+                <p className="text-lightBlack uppercase">Explore</p>
+              </button>
+            </NavLink>
           </div>
         </div>
 
-        <div className="h-[2px] w-[100%] bg-[#292929]" />
-        <div className="py-10 font-cairo text-[#7d7d7d] text-center text-[14px] font-semibold px-8">
+        <div
+          className="w-[100%] py-10 font-cairo text-[#7d7d7d] text-center 
+          text-[14px] font-semibold px-8 border-t-[1px] border-[#292929]"
+        >
           <p className="">Copyright @ 2024, Codemasons.</p>
           <p>Codemasons is licensed by the Accepted Rite of Codemasonry.</p>
         </div>
