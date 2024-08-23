@@ -1,4 +1,5 @@
 import { useLoaderData } from 'react-router-dom';
+import { queryClient } from 'queryClient';
 import { getBootcamps } from 'service';
 
 import Homepage from 'components/Homepage';
@@ -12,7 +13,10 @@ export const loader = async () => {
   const params = {
     limit: 4,
   };
-  const bootcamps = await getBootcamps(params);
+  const bootcamps = await queryClient.fetchQuery({
+    queryKey: ['home-bootcamps'],
+    queryFn: () => getBootcamps(params),
+  });
   return bootcamps;
 };
 
