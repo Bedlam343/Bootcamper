@@ -67,11 +67,11 @@ const MainNavigation = () => {
           ) : (
             <NavLink to="/login">
               <button
-                className="text-white uppercase rounded-lg w-[90px] lg:w-[120px] 
-          h-[45px] lg:h-[50px] bg-themeOrange hover:bg-themeBlue 
+                className="text-white uppercase rounded-lg w-[80px] lg:w-[100px] 
+          h-[40px] lg:h-[45px] bg-themeOrange hover:bg-themeBlue 
           flex items-center justify-center"
               >
-                Sign up
+                Join
               </button>
             </NavLink>
           )}
