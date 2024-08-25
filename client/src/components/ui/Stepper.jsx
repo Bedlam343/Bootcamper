@@ -6,7 +6,7 @@ const Stepper = ({ step }) => {
           <p className="text-easyWhite font-inter text-[14px]">Step 1 of 2</p>
         )}
         <div
-          className={`h-[5px] w-[150px] bg-themeBlue ${
+          className={`h-[5px] w-[150px] ${
             step === 1 ? 'bg-themeBlue' : 'bg-gray-700'
           }`}
         />

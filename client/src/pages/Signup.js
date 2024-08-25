@@ -1,22 +1,54 @@
+import React, { useEffect, useRef, useState } from 'react';
 import Checkbox from 'components/ui/Checkbox';
 import Footer from 'components/ui/Footer';
 import Stepper from 'components/ui/Stepper';
 import TextField from 'components/ui/TextField';
-import React, { useEffect, useRef, useState } from 'react';
+import { useActionData, useSubmit } from 'react-router-dom';
 
 const Signup = () => {
   const [step, setStep] = useState(1);
   const [checkedId, setCheckedId] = useState('');
-  const [emptyError, setEmptyError] = useState(false);
+  const [errors, setErrors] = useState({
+    emailError: '',
+    passwordError: '',
+    emptyError: '',
+    generalError: '',
+  });
+  const [isSigningUp, setIsSigningUp] = useState(false);
+
+  const serverErrors = useActionData();
+
+  useEffect(() => {
+    if (!serverErrors) return;
+    setErrors((currErrors) => ({
+      ...currErrors,
+      emailError: serverErrors.emailError,
+      generalError: serverErrors.generalError,
+    }));
+    setIsSigningUp(false);
+  }, [serverErrors]);
 
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
+  const submit = useSubmit();
+
   const forwardBtnDisabled = step === 1 && !checkedId;
 
   const handleCheckboxToggle = (event) => {
     setCheckedId(event.target.id);
+  };
+
+  const removeTextError = (event) => {
+    if (errors.emptyError) {
+      setErrors((currErrors) => ({ ...currErrors, emptyError: '' }));
+    }
+    if (event.target.id === 'email' && errors.emailError) {
+      setErrors((currErrors) => ({ ...currErrors, emailError: '' }));
+    } else if (event.target.id === 'password' && errors.passwordError) {
+      setErrors((currErrors) => ({ ...currErrors, passwordError: '' }));
+    }
   };
 
   const handleFormSubmit = (event) => {
@@ -27,25 +59,48 @@ const Signup = () => {
       return;
     }
 
-    if (!nameRef.current.value) {
-      setEmptyError('name');
+    const name = nameRef.current.value;
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    if (!name) {
+      setErrors((currErrors) => ({ ...currErrors, emptyError: 'name' }));
       nameRef.current.focus();
       return;
     }
-    if (!emailRef.current.value) {
-      setEmptyError('email');
+    if (!email) {
+      setErrors((currErrors) => ({ ...currErrors, emptyError: 'email' }));
       emailRef.current.focus();
       return;
     }
-    if (!passwordRef.current.value) {
-      setEmptyError('password');
+    if (!password) {
+      setErrors((currErrors) => ({ ...currErrors, emptyError: 'password' }));
       passwordRef.current.focus();
       return;
     }
 
     // validate email
+    if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+      setErrors((currErrors) => ({
+        ...currErrors,
+        emailError: 'Invalid Email',
+      }));
+      return;
+    }
 
     // validate password
+    if (password.length < 6) {
+      setErrors((currErrors) => ({
+        ...currErrors,
+        passwordError: 'Password must contain at least 6 characters',
+      }));
+      return;
+    }
+
+    const formData = new FormData(event.currentTarget);
+    formData.set('role', formData.get('checkbox1') ? 'publisher' : 'user');
+    submit(formData, { method: 'POST' });
+    setIsSigningUp(true);
   };
 
   return (
@@ -96,23 +151,35 @@ const Signup = () => {
                 <TextField
                   id="name"
                   label="Name"
-                  error={emptyError === 'name'}
+                  errorFill={errors.emptyError === 'name'}
+                  onChange={removeTextError}
                   ref={nameRef}
                 />
                 <TextField
                   id="email"
                   label="Email"
-                  error={emptyError === 'email'}
+                  errorFill={errors.emptyError === 'email'}
+                  errorText={errors.emailError}
+                  onChange={removeTextError}
                   ref={emailRef}
                 />
                 <TextField
                   id="password"
                   label="Password"
-                  error={emptyError === 'password'}
+                  type="password"
+                  errorFill={errors.emptyError === 'password'}
+                  errorText={errors.passwordError}
+                  onChange={removeTextError}
                   ref={passwordRef}
                 />
               </div>
             </div>
+          )}
+
+          {step === 2 && serverErrors?.generalError && (
+            <p className="mt-8 font-cairo text-red-400">
+              {serverErrors?.generalError}
+            </p>
           )}
 
           {/* buttons */}
@@ -142,7 +209,7 @@ const Signup = () => {
                   : 'bg-white hover:bg-[#d2d2d2]'
               }`}
             >
-              {step === 1 ? 'Next' : 'Create'}
+              {step === 1 ? 'Next' : isSigningUp ? 'Creating...' : 'Create'}
             </button>
           </div>
         </form>
