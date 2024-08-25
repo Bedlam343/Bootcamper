@@ -154,7 +154,7 @@ const Homepage = ({ bootcamps }) => {
 
           <p className="text-white font-kellySlab text-3xl text-center mt-20">
             Start exploring and begin your journey of becoming a{' '}
-            <span className="text-themeBlue">Codemason</span>
+            <span className="text-themeBlue">Codemason</span>.
           </p>
 
           <div className="flex justify-center mt-12">
