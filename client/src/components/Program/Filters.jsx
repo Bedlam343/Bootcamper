@@ -30,6 +30,7 @@ const Filters = () => {
     <div className="flex justify-center gap-4 border-b-[1px] border-[#575757]">
       {FILTERS.map(({ img, label, filter }) => (
         <div
+          key={filter}
           onClick={() => handleFilterClick(filter)}
           className={`flex items-center justify-center hover:bg-[#3f3f3f] 
     hover:cursor-pointer px-6 py-4 gap-2 border-b-[3px] border-t-[3px] border-t-transparent ${

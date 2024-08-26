@@ -7,6 +7,7 @@ export const getBootcamp = (bootcampId) => {
 };
 
 export const getBootcamps = async (params = {}) => {
+  console.log('getBootcamps');
   let bootcamps = [];
   try {
     const response = await axios.get(`/api/v1/bootcamps`, {

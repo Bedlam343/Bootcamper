@@ -13,7 +13,9 @@ import Root, { loader as rootLoader } from 'pages/Root';
 import Homepage, { loader as homeLoader } from 'pages/Home';
 import LoginPage from 'pages/Login';
 import SignupPage from 'pages/Signup';
-import ProgramsPage from 'pages/Programs/Programs';
+import ProgramsPage, {
+  loader as programsLoader,
+} from 'pages/Programs/Programs';
 import BootcampsRoot from 'pages/Bootcamp/BootcampsRoot';
 import AllBootcamps, {
   loader as allBootcampsLoader,
@@ -48,7 +50,11 @@ const router = createBrowserRouter(
         <Route index element={<Homepage />} loader={homeLoader} />
         <Route path="login" element={<LoginPage />} action={login} />
         <Route path="signup" element={<SignupPage />} action={signup} />
-        <Route path="programs" element={<ProgramsPage />} />
+        <Route
+          path="programs"
+          element={<ProgramsPage />}
+          loader={programsLoader}
+        />
 
         {/* <Route element={<BootcampContextLayout />}>
           <Route path="bootcamps" element={<BootcampsRoot />}>
