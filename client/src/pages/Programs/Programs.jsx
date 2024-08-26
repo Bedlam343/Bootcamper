@@ -20,7 +20,10 @@ const Programs = () => {
   return (
     <div className="">
       <Filters />
-      <div className="flex justify-center gap-4 pt-10">
+      <div
+        style={{ maxHeight: 675 }}
+        className="flex justify-center gap-4 pt-8"
+      >
         <ProgramList
           programs={programs}
           onProgramClick={handleProgramClick}

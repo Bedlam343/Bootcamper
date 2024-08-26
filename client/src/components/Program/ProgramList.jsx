@@ -1,6 +1,7 @@
 const ProgramList = ({ programs, selectedProgramId, onProgramClick }) => {
+  console.log(window.innerHeight);
   return (
-    <div className="flex flex-col items-center gap-4 max-h-screen overflow-y-scroll px-4">
+    <div className={`flex flex-col items-center gap-4 overflow-y-scroll px-4`}>
       {programs.map((program) => (
         <div
           key={program.id}
@@ -19,8 +20,10 @@ const ProgramList = ({ programs, selectedProgramId, onProgramClick }) => {
           />
 
           <div
-            className={`px-4 py-4 group-hover:bg-black 
-            ${selectedProgramId === program.id ? 'bg-black' : 'bg-lightBlack'}`}
+            className={`px-4 py-4 group-hover:bg-gray-700 
+            ${
+              selectedProgramId === program.id ? 'bg-gray-700' : 'bg-lightBlack'
+            }`}
           >
             <p
               className={`font-cairo font-semibold text-xl text-white group-hover:underline
