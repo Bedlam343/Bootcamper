@@ -1,27 +1,32 @@
-const Stepper = ({ step }) => {
+import { useEffect, useRef } from 'react';
+
+const Stepper = ({
+  step,
+  numSteps = 2,
+  stepWidth = 150,
+  stepHeight = 5,
+  className = '',
+  activeColor = 'themeBlue',
+  inactiveColor = 'gray-700',
+}) => {
   return (
-    <div className="flex gap-2 mt-8 items-end">
-      <div>
-        {step === 1 && (
-          <p className="text-easyWhite font-inter text-[14px]">Step 1 of 2</p>
-        )}
-        <div
-          className={`h-[5px] w-[150px] ${
-            step === 1 ? 'bg-themeBlue' : 'bg-gray-700'
-          }`}
-        />
-      </div>
-      <div>
-        <div>
-          {step === 2 && (
-            <p className="text-easyWhite font-inter text-[14px]">Step 2 of 2</p>
+    <div
+      className={`grid grid-cols-${numSteps.toString()} w-[100%] items-end gap-2 ${className}`}
+    >
+      {Array.from({ length: numSteps }).map((_, index) => (
+        <div key={index}>
+          {step === index + 1 && (
+            <p className="text-easyWhite font-inter text-[14px]">
+              Step {index + 1} of {numSteps}
+            </p>
           )}
           <div
-            className={`h-[5px] w-[150px] 
-          ${step === 2 ? 'bg-themeBlue' : 'bg-gray-700'}`}
+            className={`h-[${stepHeight}px] ${
+              step === index + 1 ? `bg-${activeColor}` : `bg-${inactiveColor}`
+            }`}
           />
         </div>
-      </div>
+      ))}
     </div>
   );
 };

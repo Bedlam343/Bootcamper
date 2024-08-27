@@ -4,6 +4,7 @@ import Footer from 'components/ui/Footer';
 import Stepper from 'components/ui/Stepper';
 import TextField from 'components/ui/TextField';
 import { useActionData, useSubmit } from 'react-router-dom';
+import MasonHammer from 'components/ui/MasonHammer';
 
 const Signup = () => {
   const [step, setStep] = useState(1);
@@ -105,18 +106,14 @@ const Signup = () => {
 
   return (
     <div className="pt-12 flex flex-col items-center">
-      <img
-        src="./assets/hammer.png"
-        alt="Codemason Hammer"
-        className="w-[80px] h-[80px] animate-hammer-swing"
-      />
+      <MasonHammer />
 
-      <div className="mt-14 flex flex-col items-center">
+      <div className="mt-14 flex flex-col items-center w-[350px]">
         <p className="uppercase font-cairo text-white font-semibold text-4xl text-center">
           The Beginning...
         </p>
 
-        <Stepper step={step} />
+        <Stepper step={step} className="mt-8" />
 
         <form
           className="mt-8 flex flex-col items-center w-[100%]"

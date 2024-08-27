@@ -1,3 +1,4 @@
+import MasonHammer from 'components/ui/MasonHammer';
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink, useActionData, useSubmit } from 'react-router-dom';
 
@@ -40,11 +41,7 @@ const Login = () => {
   return (
     <>
       <div className="bg-black pt-12 flex flex-col items-center">
-        <img
-          src="./assets/hammer.png"
-          alt="Codemason Hammer"
-          className="w-[80px] h-[80px] animate-hammer-swing"
-        />
+        <MasonHammer />
         <div className="mt-16">
           <p className="uppercase font-cairo text-white font-semibold text-4xl text-center">
             Sign In
