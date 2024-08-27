@@ -1,9 +1,9 @@
-import { Typography } from "@mui/material";
-import CreateBootcamp from "components/Bootcamp/Create/CreateBootcamp";
-import { useAuth } from "store/AuthProvider";
-import { ADMIN, PUBLISHER, USER } from "util/constants";
-import { createBootcamp, createCourse } from "service";
-import { redirect } from "react-router-dom";
+import { Typography } from '@mui/material';
+import CreateBootcamp from 'components/Bootcamp/Create/CreateBootcamp';
+import { useAuth } from 'store/AuthProvider';
+import { ADMIN, PUBLISHER, USER } from 'util/constants';
+import { createBootcamp, createCourse } from 'service';
+import { redirect } from 'react-router-dom';
 
 const NewBootcamp = () => {
   const { role } = useAuth();
@@ -14,13 +14,13 @@ const NewBootcamp = () => {
     }
     if (role === USER) {
       return (
-        <Typography sx={{ margin: "1em" }} variant="h4">
+        <Typography sx={{ margin: '1em' }} variant="h4">
           Only publisher accounts can create Bootcamps.
         </Typography>
       );
     }
     return (
-      <Typography sx={{ margin: "1em" }} variant="h4">
+      <Typography sx={{ margin: '1em' }} variant="h4">
         Please Log in with a publisher account to publish a Bootcamp.
       </Typography>
     );
@@ -32,8 +32,8 @@ const NewBootcamp = () => {
 export const action = async ({ request }) => {
   const formData = await request.formData();
 
-  const { bootcamp, courses } = JSON.parse(formData.get("data"));
-  const token = formData.get("token");
+  const { bootcamp, courses } = JSON.parse(formData.get('data'));
+  const token = formData.get('token');
 
   try {
     let response = await createBootcamp(bootcamp, token);
@@ -52,7 +52,7 @@ export const action = async ({ request }) => {
     }
 
     return {
-      error: "Something went wrong. Please try again later.",
+      error: 'Something went wrong. Please try again later.',
     };
   }
 };

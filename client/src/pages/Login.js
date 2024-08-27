@@ -103,8 +103,8 @@ const Login = () => {
             <button
               type="submit"
               disabled={loggingIn}
-              className={`bg-[#585858] min-w-[90px] w-fit h-[40px] py-2 px-4 flex justify-center
-              items-center mt-4 rounded-[5px] hover:bg-[#424242] 
+              className={`bg-gray-700 min-w-[90px] w-fit h-[40px] py-2 px-4 flex justify-center
+              items-center mt-4 rounded-[5px] hover:bg-gray-600
               ${loggingIn ? 'hover:cursor-not-allowed' : ''}`}
             >
               <p className="uppercase text-easyWhite">
