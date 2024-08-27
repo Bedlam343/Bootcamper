@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 
 const FILTERS = [
   { img: './assets/house.png', label: 'Housing', filter: 'housing' },
@@ -14,7 +14,7 @@ const FILTERS = [
   },
 ];
 
-const Filters = () => {
+const Filters = forwardRef((_, ref) => {
   const [activeFilters, setActiveFilters] = useState({
     housing: false,
     jobGuarantee: false,
@@ -27,7 +27,10 @@ const Filters = () => {
   };
 
   return (
-    <div className="flex justify-center gap-4 border-b-[1px] border-[#575757]">
+    <div
+      ref={ref}
+      className="flex justify-center gap-4 border-b-[1px] border-[#575757]"
+    >
       {FILTERS.map(({ img, label, filter }) => (
         <div
           key={filter}
@@ -50,6 +53,6 @@ const Filters = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Filters;

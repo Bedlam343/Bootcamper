@@ -1,12 +1,11 @@
 const ProgramList = ({ programs, selectedProgramId, onProgramClick }) => {
-  console.log(window.innerHeight);
   return (
     <div className={`flex flex-col items-center gap-4 overflow-y-scroll px-4`}>
       {programs.map((program) => (
         <div
           key={program.id}
           onClick={() => onProgramClick(program.id)}
-          className={`w-[400px] hover:cursor-pointer hover:opacity-80 border-2
+          className={`w-[400px] relative hover:cursor-pointer hover:opacity-80 border-2
           hover:border-white group ${
             program.id === selectedProgramId
               ? 'border-white'
@@ -53,6 +52,15 @@ const ProgramList = ({ programs, selectedProgramId, onProgramClick }) => {
               </div>
             </div>
           </div>
+
+          {selectedProgramId === program.id && (
+            <div
+              className="absolute top-4 right-4 h-[40px] w-[100px] flex items-center 
+              justify-center bg-white rounded-full border-4 border-black"
+            >
+              Viewing
+            </div>
+          )}
         </div>
       ))}
     </div>
