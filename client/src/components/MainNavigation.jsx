@@ -48,7 +48,7 @@ const MainNavigation = () => {
               <NavLink to="/programs">Learn</NavLink>
             </li>
             <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
-              <NavLink to="/my">Teach</NavLink>
+              <NavLink to="/teach">Teach</NavLink>
             </li>
             <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
               <NavLink to="/about">About</NavLink>

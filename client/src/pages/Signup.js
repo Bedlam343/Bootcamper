@@ -145,7 +145,10 @@ const Signup = () => {
 
           {step === 2 && (
             <div className="w-[100%]">
-              <p className="text-white text-[20px]">Create Account</p>
+              <p className="text-white text-[20px]">
+                Create {checkedId === 'checkbox1' ? 'Teacher' : 'Student'}{' '}
+                Account
+              </p>
 
               <div className="mt-6 flex flex-col gap-5">
                 <TextField

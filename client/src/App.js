@@ -16,26 +16,15 @@ import SignupPage from 'pages/Signup';
 import ProgramsPage, {
   loader as programsLoader,
 } from 'pages/Programs/Programs';
-import BootcampsRoot from 'pages/Bootcamp/BootcampsRoot';
-import AllBootcamps, {
-  loader as allBootcampsLoader,
-} from 'pages/Bootcamp/AllBootcamps';
-import MyBootcamps from 'pages/Bootcamp/MyBootcamps';
-import BootcampPage, {
-  loader as bootcampLoader,
-  action as deleteBootcampAction,
-} from 'pages/Bootcamp/BootcampPage';
+import TeachPage from 'pages/Teach';
 import NewBootcamp, {
   action as publishBootcamp,
 } from 'pages/Bootcamp/NewBootcamp';
-import EditBootcampPage, {
-  action as updateBootcampAction,
-} from 'pages/Bootcamp/EditBootcamp';
+import NewProgramPage from 'pages/Programs/NewProgram';
 
 import login from 'actions/login';
 import logout from 'actions/logout';
 import signup from 'actions/signup';
-import BootcampContextLayout from 'store/BootcampContextLayout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,6 +44,8 @@ const router = createBrowserRouter(
           element={<ProgramsPage />}
           loader={programsLoader}
         />
+        <Route path="/new-program" element={<NewProgramPage />} />
+        <Route path="/teach" element={<TeachPage />} />
 
         {/* <Route element={<BootcampContextLayout />}>
           <Route path="bootcamps" element={<BootcampsRoot />}>
