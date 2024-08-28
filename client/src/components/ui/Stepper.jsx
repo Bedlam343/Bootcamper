@@ -6,12 +6,10 @@ const Stepper = ({
   stepWidth = 150,
   stepHeight = 5,
   className = '',
-  activeColor = 'themeBlue',
-  inactiveColor = 'gray-700',
 }) => {
   return (
     <div
-      className={`grid grid-cols-${numSteps.toString()} w-[100%] items-end gap-2 ${className}`}
+      className={`grid grid-cols-${numSteps} w-[100%] items-end gap-2 ${className}`}
     >
       {Array.from({ length: numSteps }).map((_, index) => (
         <div key={index}>
@@ -21,8 +19,8 @@ const Stepper = ({
             </p>
           )}
           <div
-            className={`h-[${stepHeight}px] ${
-              step === index + 1 ? `bg-${activeColor}` : `bg-${inactiveColor}`
+            className={`h-[5px] ${
+              step === index + 1 ? `bg-themeBlue` : `bg-gray-700`
             }`}
           />
         </div>

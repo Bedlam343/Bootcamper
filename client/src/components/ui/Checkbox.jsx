@@ -1,15 +1,15 @@
-const Checkbox = ({ id, checked, onClick, label }) => {
+const Checkbox = ({ id, checked, onClick, label, gap = 'gap-8' }) => {
   return (
-    <div className="flex gap-8">
+    <div className={`flex ${gap}`}>
       <input
         type="checkbox"
         id={id}
         name={id}
         checked={checked}
-        className="h-[20px] w-[20px] [clip-path:circle(40%_at_50%_50%)]"
+        className="h-[20px] w-[20px] z-10 [clip-path:circle(40%_at_50%_50%)]"
         onClick={onClick}
       />
-      <label htmlFor={id} className="text-white font-inter text-[14px]">
+      <label htmlFor={id} className="text-white font-cairo text-[14px]">
         {label}
       </label>
     </div>
