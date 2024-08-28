@@ -182,7 +182,7 @@ const NewProgram = () => {
 
             <div className={`flex w-[100%] mt-12 justify-end`}>
               <button
-                type="button"
+                type="submit"
                 className={`min-w-[90px] bg-easyWhite hover:bg-white w-fit h-[40px] py-2 px-4 flex justify-center
               items-center rounded-[5px] font-cairo ease-linear duration-300`}
               >
