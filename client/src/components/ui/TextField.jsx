@@ -2,7 +2,17 @@ import { forwardRef } from 'react';
 
 const TextField = forwardRef(
   (
-    { errorFill, label, id, type, errorText, onChange, width = 250, required },
+    {
+      errorFill,
+      label,
+      id,
+      type,
+      errorText,
+      onChange,
+      width = 250,
+      required,
+      defaultValue,
+    },
     ref
   ) => {
     return (
@@ -18,6 +28,7 @@ const TextField = forwardRef(
           ref={ref}
           onChange={onChange}
           style={{ width }}
+          defaultValue={defaultValue}
           className={`outline-none text-sm font-cairo h-[40px] px-2 mt-1 bg-easyWhite
         ${errorFill ? 'focus:bg-red-500' : 'focus:bg-white'}`}
         />

@@ -1,12 +1,12 @@
 import Checkbox from 'components/ui/Checkbox';
+import Modal from 'modal/Modal';
 import Stickers from 'components/ui/Stickers';
 import TextField from 'components/ui/TextField';
-import { useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { forwardRef, useRef, useState } from 'react';
 
 const initialErrors = {};
 
-const ProgramForm = ({ onSubmit }) => {
+const ProgramForm = forwardRef(({ onSubmit, className = '' }, ref) => {
   const [errors, setErrors] = useState({
     ...initialErrors,
   });
@@ -38,12 +38,8 @@ const ProgramForm = ({ onSubmit }) => {
 
   const renderImagePreview = () => {
     if (!previewImage || !previewUrl) return false;
-    return createPortal(
-      <div
-        onMIsse
-        className="fixed w-[100%] h-[100%] top-0 z-50 left-0 bg-black 
-      flex items-center justify-center bg-opacity-90"
-      >
+    return (
+      <Modal open={previewImage}>
         <div className="w-[500px] flex flex-col items-center gap-10 h-auto">
           <div
             className="bold text-white text-2xl hover:cursor-pointer hover:underline"
@@ -53,8 +49,7 @@ const ProgramForm = ({ onSubmit }) => {
           </div>
           <img src={previewUrl} alt="Selected" />
         </div>
-      </div>,
-      document.getElementById('overlays')
+      </Modal>
     );
   };
 
@@ -96,10 +91,12 @@ const ProgramForm = ({ onSubmit }) => {
 
   return (
     <>
+      <p className="text-white font-cairo text-2xl">Program Details</p>
       <form
+        ref={ref}
         onChange={() => setErrors({ ...initialErrors })}
         onSubmit={handleFormSubmission}
-        className="flex flex-col items-start mt-8 gap-6"
+        className={`flex flex-col items-start gap-6 mt-8 ${className}`}
       >
         <TextField
           id="name"
@@ -223,20 +220,12 @@ const ProgramForm = ({ onSubmit }) => {
           )}
         </div>
 
-        <div className={`flex w-[100%] mt-12 justify-end`}>
-          <button
-            type="submit"
-            className={`min-w-[90px] bg-easyWhite hover:bg-white w-fit h-[40px] py-2 px-4 flex justify-center
-    items-center rounded-[5px] font-cairo ease-linear duration-300`}
-          >
-            Next
-          </button>
-        </div>
+        <button className="hidden" type="submit" />
       </form>
 
       {renderImagePreview()}
     </>
   );
-};
+});
 
 export default ProgramForm;

@@ -1,4 +1,4 @@
-import CourseList from 'components/Course/CourseList';
+import UnitList from 'components/Unit/UnitList';
 
 const ProgramDetails = ({ program }) => {
   if (!program) return null;
@@ -83,7 +83,7 @@ const ProgramDetails = ({ program }) => {
 
           <div className="w-[100%] flex justify-center mt-8">
             <div className="w-[80%] flex flex-col gap-y-6">
-              <CourseList courses={program.courses} />
+              <UnitList units={program.courses} />
             </div>
           </div>
         </div>

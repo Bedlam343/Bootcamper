@@ -6,6 +6,7 @@ const Stepper = ({
   stepWidth = 150,
   stepHeight = 5,
   className = '',
+  content,
 }) => {
   return (
     <div
