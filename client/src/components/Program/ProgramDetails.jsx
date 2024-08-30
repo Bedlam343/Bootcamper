@@ -3,10 +3,9 @@ import UnitList from 'components/Unit/UnitList';
 const ProgramDetails = ({ program }) => {
   if (!program) return null;
 
-  const programDuration = program.courses.reduce(
-    (acc, course) => acc + Number(course.weeks),
-    0
-  );
+  const programDuration =
+    program.weeks ||
+    program.courses.reduce((acc, course) => acc + Number(course.weeks), 0);
 
   return (
     <div className="sm:max-w-[750px] overflow-y-scroll bg-lightBlack">

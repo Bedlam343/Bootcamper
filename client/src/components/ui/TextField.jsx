@@ -6,7 +6,10 @@ const TextField = forwardRef(
       errorFill,
       label,
       id,
+      value,
       type,
+      min,
+      max,
       errorText,
       onChange,
       width = 250,
@@ -25,7 +28,10 @@ const TextField = forwardRef(
           name={id}
           id={id}
           type={type || 'text'}
+          value={value}
           ref={ref}
+          min={min}
+          max={max}
           onChange={onChange}
           style={{ width }}
           defaultValue={defaultValue}
