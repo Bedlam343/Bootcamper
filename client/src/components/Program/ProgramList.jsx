@@ -4,6 +4,7 @@ const ProgramList = ({
   programs,
   selectedProgramId,
   onProgramClick,
+  equalHeight,
   horizontal = false,
 }) => {
   return (
@@ -20,6 +21,7 @@ const ProgramList = ({
           program={program}
           onClick={onProgramClick}
           selected={selectedProgramId === program.id}
+          equalHeight={equalHeight}
         />
       ))}
     </div>

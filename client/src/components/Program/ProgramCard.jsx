@@ -1,9 +1,11 @@
-const ProgramCard = ({ program, onClick, selected }) => {
+const ProgramCard = ({ program, onClick, selected, equalHeight }) => {
   return (
     <div
       id={program.id}
       onClick={() => onClick(program.id)}
-      className={`min-w-[300px] max-w-[400px] relative hover:cursor-pointer hover:opacity-80 border-2
+      className={`min-w-[300px] max-w-[400px] bg-lightBlack ${
+        equalHeight ? 'min-h-fit' : ''
+      } relative hover:cursor-pointer hover:opacity-80 border-2
   hover:border-white group ${selected ? 'border-white' : 'border-[#acacac] '}`}
     >
       <img

@@ -41,21 +41,21 @@ const Teach = () => {
   }
 
   return (
-    <div className="flex flex-col items-center pt-12">
+    <div className="flex flex-col items-center py-12">
       <MasonHammer />
-      <p className="font-cairo text-xl mt-8 text-white max-w-[500px] text-center italic">
+      <p className="font-cairo px-4 sm:px-0 sm:text-xl mt-8 text-white sm:max-w-[500px] text-center italic">
         "A good <span className="text-themeBlue">teacher</span> can be the{' '}
         <span className="text-themeBlue">difference</span> between{' '}
         <span className="text-themeBlue">enlightenment</span> and{' '}
         <span className="text-themeBlue">ignorance</span>..."
       </p>
 
-      <div className="mt-12 flex flex-col items-center gap-4">
-        <p className="text-easyWhite text-2xl font-cairo uppercase">
+      <div className="mt-10 sm:mt-12 flex flex-col items-center gap-4">
+        <p className="text-easyWhite text-xl sm:text-2xl font-cairo uppercase">
           Your Programs
         </p>
         <div
-          className={`max-w-[800px] ${
+          className={`w-[300px] sm:min-w-[500px] md:min-w-[680px] lg:min-w-[720px] ${
             programs ? 'bg-black mt-4 mb-2' : 'bg-lightBlack px-8 py-6'
           } flex items-center justify-center`}
         >
@@ -64,6 +64,7 @@ const Teach = () => {
               programs={programs}
               horizontal
               onProgramClick={() => {}}
+              equalHeight
             />
           ) : (
             <p className="text-gray-200 font-cairo">
