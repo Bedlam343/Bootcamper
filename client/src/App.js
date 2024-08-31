@@ -25,6 +25,7 @@ import NewProgramPage from 'pages/Programs/NewProgram';
 import login from 'actions/login';
 import logout from 'actions/logout';
 import signup from 'actions/signup';
+import newProgram from 'actions/newProgram';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -44,31 +45,13 @@ const router = createBrowserRouter(
           element={<ProgramsPage />}
           loader={programsLoader}
         />
-        <Route path="/new-program" element={<NewProgramPage />} />
+        <Route
+          path="/new-program"
+          element={<NewProgramPage />}
+          action={newProgram}
+        />
         <Route path="/teach" element={<TeachPage />} />
 
-        {/* <Route element={<BootcampContextLayout />}>
-          <Route path="bootcamps" element={<BootcampsRoot />}>
-            <Route
-              index
-              element={<AllBootcamps />}
-              loader={allBootcampsLoader}
-            />
-            <Route path="my-bootcamps" element={<MyBootcamps />} />
-          </Route>
-
-          <Route
-            path="bootcamps/:bootcampId"
-            loader={bootcampLoader}
-            action={deleteBootcampAction}
-            element={<BootcampPage />}
-          />
-          <Route
-            path="bootcamps/:bootcampId/edit"
-            element={<EditBootcampPage />}
-            action={updateBootcampAction}
-          />
-        </Route> */}
         <Route
           path="bootcamps/new"
           element={<NewBootcamp />}

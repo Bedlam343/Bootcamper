@@ -1,3 +1,5 @@
 node_modules
 config/dev.js
 Notes.txt
+service-account-key.json
+cors.json

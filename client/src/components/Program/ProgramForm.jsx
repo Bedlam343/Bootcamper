@@ -25,6 +25,7 @@ const ProgramForm = forwardRef(
     const [averageCost, setAverageCost] = useState(
       programFormData?.get('averageCost') || ''
     );
+    const [weeks, setWeeks] = useState(programFormData?.get('weeks') || '');
 
     const nameRef = useRef();
     const descriptionRef = useRef();
@@ -35,12 +36,19 @@ const ProgramForm = forwardRef(
     const handleCostChange = (event) => {
       const value = event.target.value;
       if (value[0] === '0') return;
-      if (isNaN(value)) return;
+      if (isNaN(value) || value === 'e') return;
       if (Number(value) > 10_000) {
-        setAverageCost('100000');
+        setAverageCost('10000');
         return;
       }
       setAverageCost(value);
+    };
+
+    const handleWeeksChange = (event) => {
+      const value = event.target.value;
+      if (value[0] === '0') return;
+      if (isNaN(value) || value === 'e') return;
+      setWeeks(value);
     };
 
     const handleImageUpload = (event) => {
@@ -100,6 +108,12 @@ const ProgramForm = forwardRef(
       if (!averageCostRef.current.value) {
         averageCostRef.current.focus();
         setErrors((errs) => ({ ...errs, averageCostEmptyError: true }));
+        return;
+      }
+
+      if (!weeksRef.current.value) {
+        weeksRef.current.focus();
+        setErrors((errs) => ({ ...errs, weeksEmptyError: true }));
         return;
       }
 
@@ -176,15 +190,18 @@ const ProgramForm = forwardRef(
 
           <TextField
             ref={weeksRef}
-            defaultValue={programFormData?.get('weeks')}
+            value={weeks}
+            onChange={handleWeeksChange}
             id="weeks"
             label="Duration (weeks)"
             type="number"
             min={1}
             width={300}
+            errorFill={errors.weeksEmptyError}
+            required
           />
 
-          <div className="flex justify-between items-end w-[100%]">
+          {/* <div className="flex justify-between items-end w-[100%]">
             <TextField id="address" label="Address" width={300} />
             <button
               type="button"
@@ -193,7 +210,7 @@ const ProgramForm = forwardRef(
             >
               Locate
             </button>
-          </div>
+          </div> */}
 
           <div className="w-[100%]">
             <label
@@ -231,13 +248,13 @@ const ProgramForm = forwardRef(
             <label className="text-white block font-inter text-[16px]">
               Benefits
             </label>
-            <div className="mt-1 flex justify-between w-[100%] gap-8">
-              <Checkbox
+            <div className="mt-1 flex w-[100%] gap-14">
+              {/* <Checkbox
                 id="housing"
                 label="Housing"
                 gap="gap-3"
                 defaultChecked={programFormData?.get('housing')}
-              />
+              /> */}
               <Checkbox
                 id="jobGuarantee"
                 label="Job Guarantee"

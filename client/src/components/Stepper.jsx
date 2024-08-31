@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const Stepper = ({
   step,
   numSteps = 2,
@@ -40,7 +38,8 @@ const Stepper = ({
         ))}
       </div>
 
-      <div className="mt-8">{content[step - 1]}</div>
+      <div className="mt-8" />
+      {content[step - 1]}
 
       <div
         className={`flex w-[100%] mt-12 ${

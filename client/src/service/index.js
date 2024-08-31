@@ -1,4 +1,6 @@
 import axios from 'axios';
+import getSignedUrl from 'service/getSignedUrl';
+import uploadPhotoToGS from 'service/uploadPhoto';
 
 // BOOTCAMPS
 
@@ -76,3 +78,5 @@ export const getMe = (token) => {
     },
   });
 };
+
+export { getSignedUrl, uploadPhotoToGS };

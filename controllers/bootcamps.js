@@ -1,9 +1,9 @@
-const path = require("path");
-const ErrorResponse = require("../utils/errorResponse");
-const asyncHandler = require("../middleware/async");
-const geocoder = require("../utils/geocoder");
-const Bootcamp = require("../models/Bootcamp");
-const keys = require("../config/keys");
+const path = require('path');
+const ErrorResponse = require('../utils/errorResponse');
+const asyncHandler = require('../middleware/async');
+const geocoder = require('../utils/geocoder');
+const Bootcamp = require('../models/Bootcamp');
+const keys = require('../config/keys');
 
 // middleware functions
 
@@ -80,7 +80,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is bootcampe owner
-  if (bootcamp.user.toString() !== req.user.id && req.user.role !== "admin") {
+  if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to update this bootcamp`,
@@ -120,7 +120,7 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is bootcampe owner
-  if (bootcamp.user.toString() !== req.user.id && req.user.role !== "admin") {
+  if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to delete this bootcamp`,
@@ -181,7 +181,7 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   }
 
   // Make sure user is bootcampe owner
-  if (bootcamp.user.toString() !== req.user.id && req.user.role !== "admin") {
+  if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
         `User ${req.params.id} is not authorized to update this bootcamp`,
@@ -191,15 +191,15 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
   }
 
   if (!req.files) {
-    return next(new ErrorResponse("Please upload a file", 400));
+    return next(new ErrorResponse('Please upload a file', 400));
   }
 
   const file = req.files.file;
   // console.log(req.files);
 
   // Make sure that the image is a photo
-  if (!file.mimetype.startsWith("image")) {
-    return next(new ErrorResponse("Please upload an image file", 400));
+  if (!file.mimetype.startsWith('image')) {
+    return next(new ErrorResponse('Please upload an image file', 400));
   }
 
   // Check file size

@@ -51,22 +51,28 @@ const UnitList = ({ units, editable, onEdit, onDelete }) => {
             </div>
           </div>
 
-          <div className="flex justify-end text-white mt-2 gap-2">
-            <button
-              type="button"
-              onClick={() => onEdit(unit._id)}
-              className="rounded-full hover:bg-gray-700 px-2 py-2 hover:cursor-pointer"
-            >
-              <img src="./assets/edit.png" alt="Edit" className="w-[27px]" />
-            </button>
-            <button
-              type="button"
-              onClick={() => onDelete(unit._id)}
-              className="rounded-full hover:bg-gray-700 px-2 py-2 hover:cursor-pointer"
-            >
-              <img src="./assets/delete.png" alt="Edit" className="w-[27px]" />
-            </button>
-          </div>
+          {editable && (
+            <div className="flex justify-end text-white mt-2 gap-2">
+              <button
+                type="button"
+                onClick={() => onEdit(unit._id)}
+                className="rounded-full hover:bg-gray-700 px-2 py-2 hover:cursor-pointer"
+              >
+                <img src="./assets/edit.png" alt="Edit" className="w-[27px]" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onDelete(unit._id)}
+                className="rounded-full hover:bg-gray-700 px-2 py-2 hover:cursor-pointer"
+              >
+                <img
+                  src="./assets/delete.png"
+                  alt="Edit"
+                  className="w-[27px]"
+                />
+              </button>
+            </div>
+          )}
         </div>
       ))}
     </>
