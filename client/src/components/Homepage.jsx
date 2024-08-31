@@ -120,7 +120,10 @@ const Homepage = ({ bootcamps }) => {
 
           <div className="grid justify-center lg:grid-cols-2 mt-16 gap-y-14 w-[100%] gap-x-8">
             {bootcamps.map((bootcamp) => (
-              <div className="max-w-[450px] h-auto pb-4 bg-white rounded-[25px] border-2 border-[#8c8c8c]">
+              <div
+                key={bootcamp.id}
+                className="max-w-[450px] h-auto pb-4 bg-white rounded-[25px] border-2 border-[#8c8c8c]"
+              >
                 <img
                   src={bootcamp.photo}
                   alt="Bootcamp"

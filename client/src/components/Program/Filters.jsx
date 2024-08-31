@@ -1,7 +1,7 @@
 import { forwardRef, useState } from 'react';
 
 const FILTERS = [
-  { img: './assets/house.png', label: 'Housing', filter: 'housing' },
+  // { img: './assets/house.png', label: 'Housing', filter: 'housing' },
   {
     img: './assets/guarantee.png',
     label: 'Job Guarantee',
@@ -16,7 +16,7 @@ const FILTERS = [
 
 const Filters = forwardRef((_, ref) => {
   const [activeFilters, setActiveFilters] = useState({
-    housing: false,
+    // housing: false,
     jobGuarantee: false,
     jobAssistance: false,
   });

@@ -1,9 +1,13 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLoaderData } from 'react-router-dom';
 import { useAuth } from 'store/AuthProvider';
 import MasonHammer from 'components/ui/MasonHammer';
+import { queryClient } from 'queryClient';
+import { getBootcamps } from 'service';
+import ProgramList from 'components/Program/ProgramList';
 
 const Teach = () => {
   const { isLoggedIn, role } = useAuth();
+  const programs = useLoaderData();
 
   if (!isLoggedIn)
     return (
@@ -46,14 +50,26 @@ const Teach = () => {
         <span className="text-themeBlue">ignorance</span>..."
       </p>
 
-      <div className="mt-16 flex flex-col items-center gap-4">
-        <p className="text-easyWhite text-xl font-cairo uppercase">
+      <div className="mt-12 flex flex-col items-center gap-4">
+        <p className="text-easyWhite text-2xl font-cairo uppercase">
           Your Programs
         </p>
-        <div className="px-10 py-6 bg-lightBlack flex items-center justify-center">
-          <p className="text-gray-200 font-cairo">
-            You have no uploaded programs at the moment...
-          </p>
+        <div
+          className={`max-w-[800px] ${
+            programs ? 'bg-black mt-4 mb-2' : 'bg-lightBlack px-8 py-6'
+          } flex items-center justify-center`}
+        >
+          {programs ? (
+            <ProgramList
+              programs={programs}
+              horizontal
+              onProgramClick={() => {}}
+            />
+          ) : (
+            <p className="text-gray-200 font-cairo">
+              You have no uploaded programs at the moment...
+            </p>
+          )}
         </div>
       </div>
 
@@ -68,6 +84,16 @@ const Teach = () => {
       </NavLink>
     </div>
   );
+};
+
+// fetch programs belonging to the user
+export const loader = async ({ params }) => {
+  const { userId } = params;
+  const bootcamps = await queryClient.fetchQuery({
+    queryKey: ['my-bootcamps'],
+    queryFn: () => getBootcamps({ user: userId }),
+  });
+  return bootcamps;
 };
 
 export default Teach;

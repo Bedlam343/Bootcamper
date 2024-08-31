@@ -14,7 +14,7 @@ export const getBootcamps = async (params = {}) => {
   try {
     const response = await axios.get(`/api/v1/bootcamps`, {
       params: {
-        limit: params.limit,
+        ...params,
       },
     });
     bootcamps = response.data.data;

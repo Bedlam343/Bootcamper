@@ -3,8 +3,6 @@ import UnitList from 'components/Unit/UnitList';
 const ProgramDetails = ({ program, style = {}, editable }) => {
   if (!program) return null;
 
-  console.log(program);
-
   const programDuration =
     program.weeks ||
     program.courses.reduce((acc, course) => acc + Number(course.weeks), 0);
@@ -76,6 +74,28 @@ const ProgramDetails = ({ program, style = {}, editable }) => {
             Duration: {programDuration} weeks
           </p>
         </div>
+
+        {program.jobGuarantee && (
+          <div className="flex gap-x-3 items-center">
+            <img
+              src="./assets/guarantee.png"
+              alt="Location"
+              className="h-[20px] w-[20px]"
+            />
+            <p className="text-gray-200 font-cairo">Job Guarantee</p>
+          </div>
+        )}
+
+        {program.jobAssistance && (
+          <div className="flex gap-x-3 items-center">
+            <img
+              src="./assets/handshake.png"
+              alt="Location"
+              className="h-[20px] w-[20px]"
+            />
+            <p className="text-gray-200 font-cairo">Job Assistance</p>
+          </div>
+        )}
 
         <div className="mt-8">
           <p className="text-2xl font-cairo text-white">Description</p>

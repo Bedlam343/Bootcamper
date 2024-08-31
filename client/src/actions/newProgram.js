@@ -15,6 +15,8 @@ const newProgram = async ({ request }) => {
   const data = Object.fromEntries(formData.entries());
   const program = JSON.parse(data.program);
   program.careers = program.careers.split(',');
+  program.jobGuarantee = program.jobGuarantee === 'on';
+  program.jobAssistance = program.jobAssistance === 'on';
 
   const photo = data.photo;
   const courses = JSON.parse(data.courses);

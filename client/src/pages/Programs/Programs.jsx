@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { queryClient } from 'queryClient';
 import Filters from 'components/Program/Filters';
 import { getBootcamps } from 'service';
@@ -10,14 +10,22 @@ const Programs = () => {
   const programsDivRef = useRef();
   const filtersDivRef = useRef();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const programs = useLoaderData();
-  const [selectedProgram, setSelectedProgram] = useState(programs[0]);
+  const [selectedProgram, setSelectedProgram] = useState(null);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [programDivHeight, setProgramDivHeight] = useState(645);
 
+  useEffect(() => {
+    handleProgramClick(location.hash?.split('#')[1] || programs[0].id);
+  }, [location.hash]);
+
   const handleProgramClick = (programId) => {
-    if (programId === selectedProgram.id) return;
+    if (selectedProgram && programId === selectedProgram.id) return;
     setSelectedProgram(programs.find((program) => program.id === programId));
+    navigate(`/programs#${programId}`);
   };
 
   useEffect(() => {
@@ -32,10 +40,13 @@ const Programs = () => {
 
   // update div to extend to the bottom of the page
   useEffect(() => {
+    if (!filtersDivRef?.current) return;
     setProgramDivHeight(
       windowHeight - filtersDivRef.current.getBoundingClientRect().bottom - 10
     );
   }, [windowHeight]);
+
+  if (!selectedProgram) return null;
 
   return (
     <div className="">

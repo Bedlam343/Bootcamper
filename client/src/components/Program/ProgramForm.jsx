@@ -224,6 +224,7 @@ const ProgramForm = forwardRef(
               name="careers"
               id="careers"
               value={careers}
+              readOnly
             />
             <Stickers
               items={careers}

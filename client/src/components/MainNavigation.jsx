@@ -4,7 +4,7 @@ import { useAuth } from 'store/AuthProvider';
 
 const MainNavigation = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, id: userId } = useAuth();
   const submit = useSubmit();
 
   // update state when window size changes
@@ -30,7 +30,7 @@ const MainNavigation = () => {
       <NavLink to="/">
         <div className="flex gap-2 items-center justify-center hover:cursor-pointer">
           <img
-            src="./assets/hammer.png"
+            src="/assets/hammer.png"
             alt="Codemason Logo"
             className="w-[40px] sm:w-[45px] lg:w-[55px]"
           />
@@ -48,7 +48,7 @@ const MainNavigation = () => {
               <NavLink to="/programs">Learn</NavLink>
             </li>
             <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
-              <NavLink to="/teach">Teach</NavLink>
+              <NavLink to={`/teach/${userId || 'undefined'}`}>Teach</NavLink>
             </li>
             <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
               <NavLink to="/about">About</NavLink>
