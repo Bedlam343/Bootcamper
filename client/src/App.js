@@ -17,9 +17,6 @@ import ProgramsPage, {
   loader as programsLoader,
 } from 'pages/Programs/Programs';
 import TeachPage, { loader as myProgramsLoader } from 'pages/Teach';
-import NewBootcamp, {
-  action as publishBootcamp,
-} from 'pages/Bootcamp/NewBootcamp';
 import NewProgramPage from 'pages/Programs/NewProgram';
 
 import login from 'actions/login';
@@ -54,12 +51,6 @@ const router = createBrowserRouter(
           path="/teach/:userId"
           element={<TeachPage />}
           loader={myProgramsLoader}
-        />
-
-        <Route
-          path="bootcamps/new"
-          element={<NewBootcamp />}
-          action={publishBootcamp}
         />
       </Route>
     </Route>
