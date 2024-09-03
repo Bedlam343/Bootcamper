@@ -121,36 +121,88 @@ const Homepage = ({ bootcamps }) => {
           <div className="grid justify-center lg:grid-cols-2 mt-16 gap-y-14 w-[100%] gap-x-8">
             {bootcamps.map((bootcamp) => (
               <div
-                key={bootcamp.id}
-                className="max-w-[450px] h-auto pb-4 bg-white rounded-[25px] border-2 border-[#8c8c8c]"
+                id={bootcamp.id}
+                className={`min-w-[300px] max-w-[400px] bg-lightBlack border-2
+                  border-[#acacac]`}
               >
                 <img
                   src={bootcamp.photo}
-                  alt="Bootcamp"
-                  className="w-[455px] h-[150px] rounded-t-[25px] object-cover"
+                  alt=""
+                  className="w-[400px] h-[130px] object-cover"
                 />
-                <div className="pt-4 px-4">
-                  <div className="flex justify-between items-end flex-wrap">
-                    <p className="font-cairo font-semibold text-2xl">
-                      {bootcamp.name}
-                    </p>
-                    <p className="font-cairo text-[#505050] text-[15px]">
-                      Average Cost: ${bootcamp.averageCost}
-                    </p>
+
+                <div
+                  className={`px-4 py-4 group-hover:bg-gray-700 bg-lightBlack`}
+                >
+                  <p
+                    className={`font-cairo font-semibold text-xl text-white group-hover:underline`}
+                  >
+                    {bootcamp.name}
+                  </p>
+
+                  <div className="flex gap-x-2 items-start mt-3">
+                    <img
+                      src="/assets/target.png"
+                      alt="Target"
+                      className="w-[20px] h-[20px]"
+                    />
+                    <div className="font-cairo flex flex-wrap gap-x-2 text-[14px] text-[#cbcbcb]">
+                      {bootcamp.careers.map((career, index) => (
+                        <div
+                          key={career}
+                          className="flex justify-center gap-2 items-center"
+                        >
+                          <p className="">{career}</p>
+                          {index < bootcamp.careers.length - 1 && (
+                            <div className="w-[4px] h-[4px] rounded-full bg-[#cbcbcb]" />
+                          )}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-
-                  <p className="font-cairo mt-2">{bootcamp.description}</p>
-
                   <div className="flex justify-end mt-4">
-                    <button
-                      className="rounded-[15px] w-[90px] h-[45px] bg-lightBlack 
-                      hover:bg-[#383838] flex items-center justify-center"
-                    >
-                      <p className="text-white uppercase">Details</p>
-                    </button>
+                    <NavLink to={`/programs#${bootcamp.id}`}>
+                      <button
+                        className="rounded-[5px] w-[80px] h-[40px] bg-easyWhite
+                      hover:bg-white flex items-center justify-center group"
+                      >
+                        <p className="text-black uppercase">Details</p>
+                      </button>
+                    </NavLink>
                   </div>
                 </div>
               </div>
+              // <div
+              //   key={bootcamp.id}
+              //   className="max-w-[450px] h-auto pb-4 bg-white rounded-[25px] border-2 border-[#8c8c8c]"
+              // >
+              //   <img
+              //     src={bootcamp.photo}
+              //     alt="Bootcamp"
+              //     className="w-[455px] h-[150px] rounded-t-[25px] object-cover"
+              //   />
+              //   <div className="pt-4 px-4">
+              //     <div className="flex justify-between items-end flex-wrap">
+              //       <p className="font-cairo font-semibold text-2xl">
+              //         {bootcamp.name}
+              //       </p>
+              //       <p className="font-cairo text-[#505050] text-[15px]">
+              //         Average Cost: ${bootcamp.averageCost}
+              //       </p>
+              //     </div>
+
+              //     <p className="font-cairo mt-2">{bootcamp.description}</p>
+
+              //     <div className="flex justify-end mt-4">
+              //       <button
+              //         className="rounded-[15px] w-[90px] h-[45px] bg-lightBlack
+              //         hover:bg-[#383838] flex items-center justify-center"
+              //       >
+              //         <p className="text-white uppercase">Details</p>
+              //       </button>
+              //     </div>
+              //   </div>
+              // </div>
             ))}
           </div>
 

@@ -11,12 +11,20 @@ import { useSubmit } from 'react-router-dom';
 import { useAuth } from 'store/AuthProvider';
 import Button from 'components/ui/Button';
 
-const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
+const ProgramDetails = ({
+  program,
+  style = {},
+  onChange,
+  onClose,
+  editable,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editFields, setEditFields] = useState([]);
   const [unitModal, setUnitModal] = useState({ modal: '', unit: null });
 
-  const { token } = useAuth();
+  const { token, id: userId } = useAuth();
+
+  const canEdit = editable && program.user === userId;
 
   const submit = useSubmit();
 
@@ -101,14 +109,16 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
         </div>
 
         <div className="flex justify-end px-6 pt-4 gap-4">
-          <div
-            onClick={toggleEditState}
-            className="h-[40px] w-[100px] flex items-center 
+          {canEdit && (
+            <div
+              onClick={toggleEditState}
+              className="h-[40px] w-[100px] flex items-center 
           justify-center bg-easyWhite rounded-full border-4 border-black z-50 font-cairo
           hover:cursor-pointer hover:bg-white"
-          >
-            {isEditing ? 'Done' : 'Edit'}
-          </div>
+            >
+              {isEditing ? 'Done' : 'Edit'}
+            </div>
+          )}
           <div
             onClick={onClose}
             className="h-[40px] w-[100px] flex items-center 

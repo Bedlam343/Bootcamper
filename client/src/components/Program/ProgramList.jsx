@@ -5,16 +5,17 @@ const ProgramList = ({
   selectedProgramId,
   onProgramClick,
   equalHeight,
-  horizontal = false,
+  orientation = 'vertical',
 }) => {
+  let style = 'flex flex-col items-center overflow-y-scroll gap-4 px-4';
+  if (orientation === 'horizontal') {
+    style = 'flex overflow-auto pb-4 gap-8';
+  } else if (orientation === 'grid') {
+    style = 'grid grid-cols-2';
+  }
+
   return (
-    <div
-      className={`flex ${
-        horizontal
-          ? 'overflow-auto pb-4 gap-8'
-          : 'flex-col items-center overflow-y-scroll gap-4 px-4'
-      }`}
-    >
+    <div className={`${style}`}>
       {programs.map((program) => (
         <ProgramCard
           key={program.id}

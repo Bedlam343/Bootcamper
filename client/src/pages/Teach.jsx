@@ -110,7 +110,7 @@ const Teach = () => {
             {programs ? (
               <ProgramList
                 programs={programs}
-                horizontal
+                orientation="horizontal"
                 onProgramClick={toggleDisplayProgram}
                 equalHeight
               />
@@ -139,6 +139,7 @@ const Teach = () => {
             program={displayProgram}
             onChange={handleProgramChange}
             onClose={() => toggleDisplayProgram(null)}
+            editable
           />
         </div>
       </Modal>
