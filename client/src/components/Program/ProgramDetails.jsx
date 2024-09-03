@@ -4,18 +4,17 @@ import { useEffect, useRef, useState } from 'react';
 import Careers from 'components/Program/Careers';
 import Tag from 'components/ui/Tag';
 import Modal from 'modal/Modal';
-import EditProgramField from './EditProgramField';
+import Edit from 'components/Program/Edit/Edit';
 
 const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editField, setEditField] = useState(null);
-  const [imageTop, setImageTop] = useState(null);
+  const [editFields, setEditFields] = useState([]);
 
   const imageRef = useRef();
 
   useEffect(() => {
-    setImageTop(imageRef.current.getBoundingClientRect().bottom);
-  }, [isEditing]);
+    handleEditClick(null);
+  }, [program]);
 
   if (!program) return null;
 
@@ -23,12 +22,12 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
     setIsEditing(!isEditing);
   };
 
-  const handleEditClick = (field) => {
-    setEditField(field);
+  const handleEditClick = (fields) => {
+    setEditFields(fields);
   };
 
-  const handleFieldChange = (field, newValue) => {
-    setEditField(null);
+  const handleFieldChange = (newData) => {
+    onChange(newData);
   };
 
   const programDuration =
@@ -49,12 +48,12 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
               isEditing && 'group-hover:cursor-pointer group-hover:opacity-50'
             }`}
           />
-          {isEditing && (
+          {/* {isEditing && (
             <div
               style={{
                 top: imageTop / 2,
               }}
-              className="hidden group-hover:block absolute left-1/2"
+              className="absolute left-1/2"
             >
               <img
                 src="/assets/edit.png"
@@ -62,7 +61,7 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
                 className="w-[50px] h-[50px] group-hover:cursor-pointer bg-transparent"
               />
             </div>
-          )}
+          )} */}
         </div>
 
         <div className="flex justify-end px-6 pt-4 gap-4">
@@ -88,7 +87,8 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
           <Editable
             active={isEditing}
             iconSize={35}
-            onClick={() => handleEditClick('name')}
+            gap={40}
+            onClick={() => handleEditClick(['name'])}
           >
             <p className="text-4xl text-white font-cairo">{program.name}</p>
           </Editable>
@@ -97,77 +97,65 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
 
           <Editable
             active={isEditing}
-            iconSize={20}
-            onClick={() => handleEditClick('careers')}
+            iconSize={35}
+            gap={50}
+            onClick={() =>
+              handleEditClick([
+                'careers',
+                'averageCost',
+                'weeks',
+                'jobGuarantee',
+                'jobAssistance',
+              ])
+            }
           >
-            <div className="flex gap-x-3 items-center">
-              <img
-                src="/assets/target.png"
-                alt="Location"
-                className="h-[20px] w-[20px]"
+            <div>
+              <div className="flex gap-x-3 items-center">
+                <img
+                  src="/assets/target.png"
+                  alt="Location"
+                  className="h-[20px] w-[20px]"
+                />
+                <Careers careers={program.careers} />
+              </div>
+
+              <Tag
+                text={`Average Cost: $${program.averageCost}`}
+                imgSize={20}
+                imgSrc="/assets/cash.png"
+                imgAlt="Average Cost"
               />
-              <Careers careers={program.careers} />
+
+              <Tag
+                text={`Duration: ${programDuration} weeks`}
+                imgSrc="/assets/calendar.png"
+                imgAlt="Duration"
+              />
+
+              {program.jobGuarantee && (
+                <Tag
+                  text="Job Guarantee"
+                  imgSrc="/assets/guarantee.png"
+                  alt="Job Guarantee"
+                />
+              )}
+
+              {program.jobAssistance && (
+                <Tag
+                  text="Job Assistance"
+                  imgSrc="/assets/handshake.png"
+                  imgAlt="Job Assistance"
+                />
+              )}
             </div>
           </Editable>
-
-          <Editable
-            active={isEditing}
-            iconSize={20}
-            onClick={() => handleEditClick('averageCost')}
-          >
-            <Tag
-              text={`Average Cost: $${program.averageCost}`}
-              imgSize={20}
-              imgSrc="/assets/cash.png"
-              imgAlt="Average Cost"
-            />
-          </Editable>
-
-          <Editable
-            active={isEditing}
-            iconSize={20}
-            onClick={() => handleEditClick('weeks')}
-          >
-            <Tag
-              text={`Duration: ${programDuration} weeks`}
-              imgSrc="/assets/calendar.png"
-              imgAlt="Duration"
-            />
-          </Editable>
-
-          {program.jobGuarantee && (
-            <Editable
-              active={isEditing}
-              iconSize={20}
-              onClick={() => handleEditClick('jobGuarantee')}
-            >
-              <Tag
-                text="Job Guarantee"
-                imgSrc="/assets/guarantee.png"
-                alt="Job Guarantee"
-              />
-            </Editable>
-          )}
-
-          {program.jobAssistance && (
-            <Editable
-              active={isEditing}
-              iconSize={20}
-              onClick={() => handleEditClick('jobAssistance')}
-            >
-              <Tag
-                text="Job Assistance"
-                imgSrc="/assets/handshake.png"
-                imgAlt="Job Assistance"
-              />
-            </Editable>
-          )}
 
           <div className="mt-8">
             <Editable
               active={isEditing}
               iconSize={30}
-              onClick={() => handleEditClick('description')}
+              gap={40}
+              onClick={() => handleEditClick(['description'])}
             >
               <p className="text-2xl font-cairo text-white">Description</p>
             </Editable>
@@ -177,27 +165,22 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
           </div>
 
           <div className="mt-8">
-            <Editable
-              active={isEditing}
-              iconSize={30}
-              onClick={() => handleEditClick('courses')}
-            >
-              <p className="text-2xl font-cairo text-white">Course Breakdown</p>
-            </Editable>
+            <p className="text-2xl font-cairo text-white">Course Breakdown</p>
+
             <div className="w-[100%] flex justify-center mt-8">
               <div className="w-[80%] flex flex-col gap-y-6">
-                <UnitList units={program.courses} />
+                <UnitList units={program.courses} editable={isEditing} />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <Modal open={Boolean(editField)}>
-        <EditProgramField
-          value={program[editField]}
-          field={editField}
-          onSave={(newValue) => handleFieldChange(editField, newValue)}
+      <Modal open={editFields?.length}>
+        <Edit
+          program={program}
+          fields={editFields}
+          onSave={(newData) => handleFieldChange(newData)}
           onCancel={() => handleEditClick(null)}
         />
       </Modal>

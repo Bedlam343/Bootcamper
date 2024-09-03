@@ -23,6 +23,7 @@ import login from 'actions/login';
 import logout from 'actions/logout';
 import signup from 'actions/signup';
 import newProgram from 'actions/newProgram';
+import updateProgram from 'actions/updateProgram';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
           path="/teach/:userId"
           element={<TeachPage />}
           loader={myProgramsLoader}
+          action={updateProgram}
         />
       </Route>
     </Route>

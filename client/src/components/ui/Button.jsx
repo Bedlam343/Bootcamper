@@ -1,6 +1,13 @@
-const Button = ({ children, onClick, danger = false, type = 'button' }) => {
+const Button = ({
+  children,
+  onClick,
+  danger = false,
+  type = 'button',
+  disabled,
+}) => {
   return (
     <button
+      disabled={disabled}
       type={type}
       onClick={onClick}
       className={`text-white ${

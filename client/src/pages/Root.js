@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import MainNavigation from 'components/MainNavigation';
 import { useAuth } from 'store/AuthProvider';
 import { getMe } from 'service';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Root = () => {
   const token = useLoaderData();
@@ -40,6 +42,14 @@ const Root = () => {
       <main>
         <Outlet />
       </main>
+
+      <ToastContainer
+        autoClose={3000}
+        draggable={false}
+        position="top-center"
+        theme="colored"
+        pauseOnHover={false}
+      />
     </>
   );
 };

@@ -1,5 +1,11 @@
-import { useState } from 'react';
-import { NavLink, useLoaderData } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {
+  NavLink,
+  useActionData,
+  useLoaderData,
+  useRevalidator,
+  useSubmit,
+} from 'react-router-dom';
 import { useAuth } from 'store/AuthProvider';
 import MasonHammer from 'components/ui/MasonHammer';
 import { queryClient } from 'queryClient';
@@ -7,18 +13,47 @@ import { getBootcamps } from 'service';
 import ProgramList from 'components/Program/ProgramList';
 import Modal from 'components/ui/Modal';
 import ProgramDetails from 'components/Program/ProgramDetails';
+import { useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 const Teach = () => {
   const [displayProgram, setDisplayProgram] = useState(null);
 
-  const { isLoggedIn, role } = useAuth();
+  const { isLoggedIn, role, token } = useAuth();
+
+  const queryClient = useQueryClient();
+
   const programs = useLoaderData();
+  const actionData = useActionData();
+  const submit = useSubmit();
+  const { revalidate } = useRevalidator();
 
   const toggleDisplayProgram = (programId) => {
     setDisplayProgram(programs.find((program) => program.id === programId));
   };
 
-  const handleProgramChange = () => {};
+  useEffect(() => {
+    toggleDisplayProgram(displayProgram?.id);
+  }, [programs]);
+
+  const handleProgramChange = (program) => {
+    const formData = new FormData();
+    formData.append('program', JSON.stringify(program));
+    formData.append('token', token);
+    submit(formData, { method: 'POST' });
+  };
+
+  useEffect(() => {
+    if (actionData) {
+      if (actionData.success) {
+        toast('Program Updated!', { type: 'success' });
+        queryClient.invalidateQueries({ queryKey: ['my-bootcamps'] });
+        revalidate();
+      } else if (actionData.error) {
+        toast('Error Updating Program! Try again later', { type: 'error' });
+      }
+    }
+  }, [actionData, queryClient, revalidate]);
 
   if (!isLoggedIn)
     return (

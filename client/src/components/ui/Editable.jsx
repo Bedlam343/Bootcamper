@@ -1,4 +1,4 @@
-const Editable = ({ children, active, iconSize, onClick }) => {
+const Editable = ({ children, active, iconSize, onClick, gap = 50 }) => {
   const handleClick = () => {
     if (!active) return;
     onClick();
@@ -6,8 +6,9 @@ const Editable = ({ children, active, iconSize, onClick }) => {
 
   return (
     <div
+      style={{ gap }}
       onClick={handleClick}
-      className={`flex items-center gap-8 group ${
+      className={`flex items-center group ${
         active && 'hover:cursor-pointer hover:bg-gray-700'
       }`}
     >
@@ -17,7 +18,7 @@ const Editable = ({ children, active, iconSize, onClick }) => {
           style={{ width: iconSize, height: iconSize }}
           src="/assets/edit.png"
           alt="Edit"
-          className="hidden group-hover:block"
+          // className="hidden group-hover:block"
         />
       )}
     </div>
