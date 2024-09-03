@@ -8,6 +8,7 @@ import {
 import { GS_BUCKET_NAME } from 'util/constants';
 import { generateGsPublicUrl } from 'util/helpers';
 import { queryClient } from 'queryClient';
+import { toast } from 'react-toastify';
 
 const newProgram = async ({ request }) => {
   const formData = await request.formData();
@@ -54,12 +55,13 @@ const newProgram = async ({ request }) => {
 
     // re-fetch bootcamps
     queryClient.invalidateQueries({ queryKey: ['bootcamps'] });
+    toast('Program Created!', { type: 'success' });
     return redirect(`/programs#${bootcampId}`);
   } catch (error) {
     console.log(error);
 
     // delete bootcamp if courses were not added?
-
+    toast('Error creating program.', { type: 'error' });
     return 'Error creating program.';
   }
 };

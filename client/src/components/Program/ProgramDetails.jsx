@@ -5,15 +5,26 @@ import Careers from 'components/Program/Careers';
 import Tag from 'components/ui/Tag';
 import Modal from 'modal/Modal';
 import Edit from 'components/Program/Edit/Edit';
+import UnitForm from 'components/Unit/UnitForm';
+import ConfirmationModal from 'modal/ConfirmationModal';
+import { useSubmit } from 'react-router-dom';
+import { useAuth } from 'store/AuthProvider';
+import Button from 'components/ui/Button';
 
 const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editFields, setEditFields] = useState([]);
+  const [unitModal, setUnitModal] = useState({ modal: '', unit: null });
+
+  const { token } = useAuth();
+
+  const submit = useSubmit();
 
   const imageRef = useRef();
 
   useEffect(() => {
     handleEditClick(null);
+    clearUnitModal();
   }, [program]);
 
   if (!program) return null;
@@ -28,6 +39,31 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
 
   const handleFieldChange = (newData) => {
     onChange(newData);
+  };
+
+  const clearUnitModal = () => {
+    setUnitModal({ modal: '', unit: null });
+  };
+
+  const handleUnitChange = (title, description, id) => {
+    const unit = { title, description };
+    if (id) unit._id = id;
+
+    const formData = new FormData();
+    formData.append('unit', JSON.stringify(unit));
+    formData.append('token', token);
+    formData.append('action', id ? 'update-unit' : 'add-unit');
+    formData.append('bootcampId', program.id);
+
+    submit(formData, { method: 'POST' });
+  };
+
+  const handleDeleteUnit = () => {
+    const formData = new FormData();
+    formData.append('unitId', unitModal.unit._id);
+    formData.append('action', 'delete-unit');
+    formData.append('token', token);
+    submit(formData, { method: 'POST' });
   };
 
   const programDuration =
@@ -169,9 +205,33 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
 
             <div className="w-[100%] flex justify-center mt-8">
               <div className="w-[80%] flex flex-col gap-y-6">
-                <UnitList units={program.courses} editable={isEditing} />
+                <UnitList
+                  units={program.courses}
+                  editable={isEditing}
+                  onEdit={(id) =>
+                    setUnitModal({
+                      modal: 'form',
+                      unit: program.courses.find((course) => course._id === id),
+                    })
+                  }
+                  onDelete={(id) =>
+                    setUnitModal({
+                      modal: 'confirmation',
+                      unit: program.courses.find((course) => course._id === id),
+                    })
+                  }
+                />
               </div>
             </div>
+            {isEditing && (
+              <div className="flex justify-center mt-4">
+                <Button
+                  onClick={() => setUnitModal({ modal: 'form', unit: null })}
+                >
+                  New Unit
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -184,6 +244,22 @@ const ProgramDetails = ({ program, style = {}, onChange, onClose }) => {
           onCancel={() => handleEditClick(null)}
         />
       </Modal>
+
+      <Modal open={unitModal.modal === 'form'}>
+        <UnitForm
+          onCancel={clearUnitModal}
+          onConfirm={handleUnitChange}
+          units={program.courses}
+          unit={unitModal.unit}
+        />
+      </Modal>
+
+      <ConfirmationModal
+        open={unitModal.modal === 'confirmation'}
+        onCancel={clearUnitModal}
+        onConfirm={handleDeleteUnit}
+        title="Are you sure you want to delete this unit?"
+      />
     </>
   );
 };

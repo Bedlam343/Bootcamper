@@ -40,6 +40,7 @@ const Teach = () => {
     const formData = new FormData();
     formData.append('program', JSON.stringify(program));
     formData.append('token', token);
+    formData.append('action', 'update-program');
     submit(formData, { method: 'POST' });
   };
 

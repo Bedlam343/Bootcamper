@@ -70,6 +70,22 @@ export const createCourse = (course, bootcampId, token) => {
   });
 };
 
+export const updateCourse = (course, token) => {
+  return axios.put(`/api/v1/courses/${course._id}`, course, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const deleteCourse = (courseId, token) => {
+  return axios.delete(`/api/v1/courses/${courseId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 // AUTH
 export const getMe = (token) => {
   return axios.get(`/api/v1/auth/me`, {
