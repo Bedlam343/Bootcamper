@@ -35,14 +35,12 @@ const ProgramDetails = ({
     clearUnitModal();
   }, [program]);
 
-  if (!program) return null;
+  const handleEditClick = (fields) => {
+    setEditFields(fields);
+  };
 
   const toggleEditState = () => {
     setIsEditing(!isEditing);
-  };
-
-  const handleEditClick = (fields) => {
-    setEditFields(fields);
   };
 
   const handleFieldChange = (newData) => {
@@ -52,6 +50,8 @@ const ProgramDetails = ({
   const clearUnitModal = () => {
     setUnitModal({ modal: '', unit: null });
   };
+
+  if (!program) return null;
 
   const handleUnitChange = (title, description, id) => {
     const unit = { title, description };

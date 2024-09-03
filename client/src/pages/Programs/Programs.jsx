@@ -41,12 +41,11 @@ const Programs = () => {
   // update div to extend to the bottom of the page
   useEffect(() => {
     if (!filtersDivRef?.current) return;
+
     setProgramDivHeight(
       windowHeight - filtersDivRef.current.getBoundingClientRect().bottom - 10
     );
   }, [windowHeight]);
-
-  if (!selectedProgram) return null;
 
   return (
     <div className="">
@@ -59,7 +58,7 @@ const Programs = () => {
         <ProgramList
           programs={programs}
           onProgramClick={handleProgramClick}
-          selectedProgramId={selectedProgram.id}
+          selectedProgramId={selectedProgram?.id}
         />
 
         <ProgramDetails program={selectedProgram} />
