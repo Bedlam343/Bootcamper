@@ -108,8 +108,8 @@ const ProgramDetails = ({
           )} */}
         </div>
 
-        <div className="flex justify-end px-6 pt-4 gap-4">
-          {canEdit && (
+        {canEdit && (
+          <div className="flex justify-end px-6 pt-4 gap-4">
             <div
               onClick={toggleEditState}
               className="h-[40px] w-[100px] flex items-center 
@@ -118,16 +118,17 @@ const ProgramDetails = ({
             >
               {isEditing ? 'Done' : 'Edit'}
             </div>
-          )}
-          <div
-            onClick={onClose}
-            className="h-[40px] w-[100px] flex items-center 
+
+            <div
+              onClick={onClose}
+              className="h-[40px] w-[100px] flex items-center 
           justify-center bg-easyWhite rounded-full border-4 border-black z-50 font-cairo
           hover:cursor-pointer hover:bg-white"
-          >
-            Close
+            >
+              Close
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="px-8 py-6">
           <Editable

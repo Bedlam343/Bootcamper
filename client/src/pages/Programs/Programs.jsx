@@ -1,32 +1,49 @@
-import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import {
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useRevalidator,
+  useSearchParams,
+} from 'react-router-dom';
 import { queryClient } from 'queryClient';
 import Filters from 'components/Program/Filters';
 import { getBootcamps } from 'service';
 import ProgramList from 'components/Program/ProgramList';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import ProgramDetails from 'components/Program/ProgramDetails';
 
 const Programs = () => {
   const programsDivRef = useRef();
   const filtersDivRef = useRef();
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
-
   const programs = useLoaderData();
+
+  const [filters, setFilters] = useState({
+    jobGuarantee: false,
+    jobAssistance: false,
+  });
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [programDivHeight, setProgramDivHeight] = useState(645);
 
-  useEffect(() => {
-    handleProgramClick(location.hash?.split('#')[1] || programs[0].id);
-  }, [location.hash]);
+  // select program and set program id as hash in the url
+  const handleProgramSelection = useCallback(
+    (programId) => {
+      if (selectedProgram && programId === selectedProgram.id) return;
+      setSelectedProgram(programs.find((program) => program.id === programId));
+      navigate(`/programs${location.search}#${programId}`);
+    },
+    [navigate, selectedProgram, programs, location.search]
+  );
 
-  const handleProgramClick = (programId) => {
-    if (selectedProgram && programId === selectedProgram.id) return;
-    setSelectedProgram(programs.find((program) => program.id === programId));
-    navigate(`/programs#${programId}`);
-  };
+  // select program on initial page load (does not scroll down on complete re-load)
+  useEffect(() => {
+    let hash = location.hash?.split('#')[1] || programs[0].id;
+    handleProgramSelection(hash);
+  }, [programs, location.hash, handleProgramSelection]);
 
   useEffect(() => {
     const updateWindowHeight = () => {
@@ -47,9 +64,25 @@ const Programs = () => {
     );
   }, [windowHeight]);
 
+  useEffect(() => {
+    const params = {};
+    if (filters.jobAssistance) params.jobAssistance = true;
+    if (filters.jobGuarantee) params.jobGuarantee = true;
+    setSearchParams({ ...params });
+  }, [filters, setSearchParams]);
+
+  const handleFilterClick = (filter) => {
+    // flip the active status of the filter
+    setFilters((filters) => ({ ...filters, [filter]: !filters[filter] }));
+  };
+
   return (
     <div className="">
-      <Filters ref={filtersDivRef} />
+      <Filters
+        filters={filters}
+        ref={filtersDivRef}
+        onChange={handleFilterClick}
+      />
       <div
         ref={programsDivRef}
         style={{ maxHeight: programDivHeight }}
@@ -57,7 +90,7 @@ const Programs = () => {
       >
         <ProgramList
           programs={programs}
-          onProgramClick={handleProgramClick}
+          onProgramClick={handleProgramSelection}
           selectedProgramId={selectedProgram?.id}
         />
 
@@ -67,10 +100,14 @@ const Programs = () => {
   );
 };
 
-export const loader = async () => {
+export const loader = async ({ params, request }) => {
+  const url = new URL(request.url);
+  const searchParams = Object.fromEntries(url.searchParams.entries());
+  console.log('searchParams', searchParams);
+
   const bootcamps = await queryClient.fetchQuery({
-    queryKey: ['bootcamps'],
-    queryFn: () => getBootcamps({ limit: 10 }),
+    queryKey: ['bootcamps', { ...searchParams }],
+    queryFn: () => getBootcamps({ limit: 10, ...searchParams }),
   });
   return bootcamps;
 };

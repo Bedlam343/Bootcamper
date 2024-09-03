@@ -123,6 +123,7 @@ const Homepage = ({ bootcamps }) => {
           <div className="grid justify-center lg:grid-cols-2 mt-16 gap-y-14 w-[100%] gap-x-8">
             {bootcamps.map((bootcamp) => (
               <div
+                key={bootcamp.id}
                 id={bootcamp.id}
                 className={`min-w-[300px] max-w-[400px] bg-lightBlack border-2
                   border-[#acacac]`}

@@ -14,18 +14,7 @@ const FILTERS = [
   },
 ];
 
-const Filters = forwardRef((_, ref) => {
-  const [activeFilters, setActiveFilters] = useState({
-    // housing: false,
-    jobGuarantee: false,
-    jobAssistance: false,
-  });
-
-  const handleFilterClick = (filter) => {
-    // flip the active status of the filter
-    setActiveFilters((filters) => ({ ...filters, [filter]: !filters[filter] }));
-  };
-
+const Filters = forwardRef(({ filters = {}, onChange }, ref) => {
   return (
     <div
       ref={ref}
@@ -34,10 +23,10 @@ const Filters = forwardRef((_, ref) => {
       {FILTERS.map(({ img, label, filter }) => (
         <div
           key={filter}
-          onClick={() => handleFilterClick(filter)}
+          onClick={() => onChange(filter)}
           className={`flex items-center justify-center hover:bg-[#3f3f3f] 
     hover:cursor-pointer px-6 py-4 gap-2 border-b-[3px] border-t-[3px] border-t-transparent ${
-      activeFilters[filter] ? 'border-white' : 'border-b-transparent'
+      filters[filter] ? 'border-white' : 'border-b-transparent'
     }`}
         >
           <img src={img} alt={label} className="w-[30px]" />
