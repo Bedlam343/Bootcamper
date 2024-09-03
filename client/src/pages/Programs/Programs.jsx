@@ -2,7 +2,6 @@ import {
   useLoaderData,
   useLocation,
   useNavigate,
-  useRevalidator,
   useSearchParams,
 } from 'react-router-dom';
 import { queryClient } from 'queryClient';
@@ -11,6 +10,12 @@ import { getBootcamps } from 'service';
 import ProgramList from 'components/Program/ProgramList';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ProgramDetails from 'components/Program/ProgramDetails';
+
+const DEFAULT_FILTERS = {
+  jobGuarantee: false,
+  jobAssistance: false,
+  maximumCost: 20_000,
+};
 
 const Programs = () => {
   const programsDivRef = useRef();
@@ -21,10 +26,7 @@ const Programs = () => {
   const location = useLocation();
   const programs = useLoaderData();
 
-  const [filters, setFilters] = useState({
-    jobGuarantee: false,
-    jobAssistance: false,
-  });
+  const [filters, setFilters] = useState({ ...DEFAULT_FILTERS });
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [programDivHeight, setProgramDivHeight] = useState(645);
@@ -41,7 +43,7 @@ const Programs = () => {
 
   // select program on initial page load (does not scroll down on complete re-load)
   useEffect(() => {
-    let hash = location.hash?.split('#')[1] || programs[0].id;
+    let hash = location.hash?.split('#')[1] || programs[0]?.id;
     handleProgramSelection(hash);
   }, [programs, location.hash, handleProgramSelection]);
 
@@ -66,14 +68,17 @@ const Programs = () => {
 
   useEffect(() => {
     const params = {};
-    if (filters.jobAssistance) params.jobAssistance = true;
-    if (filters.jobGuarantee) params.jobGuarantee = true;
+    Object.keys(filters).forEach((filter) => {
+      if (filters[filter]) {
+        params[filter] = filters[filter];
+      }
+    });
     setSearchParams({ ...params });
   }, [filters, setSearchParams]);
 
-  const handleFilterClick = (filter) => {
+  const handleFilterClick = (filter, value) => {
     // flip the active status of the filter
-    setFilters((filters) => ({ ...filters, [filter]: !filters[filter] }));
+    setFilters((filters) => ({ ...filters, [filter]: value }));
   };
 
   return (
@@ -82,20 +87,29 @@ const Programs = () => {
         filters={filters}
         ref={filtersDivRef}
         onChange={handleFilterClick}
+        onReset={() => setFilters({ ...DEFAULT_FILTERS })}
       />
-      <div
-        ref={programsDivRef}
-        style={{ maxHeight: programDivHeight }}
-        className="flex justify-center gap-4 py-8"
-      >
-        <ProgramList
-          programs={programs}
-          onProgramClick={handleProgramSelection}
-          selectedProgramId={selectedProgram?.id}
-        />
+      {programs.length === 0 ? (
+        <div className="pt-20">
+          <p className="text-gray-400 font-cairo text-2xl text-center">
+            No programs found. Try adjusting the filters.
+          </p>
+        </div>
+      ) : (
+        <div
+          ref={programsDivRef}
+          style={{ maxHeight: programDivHeight }}
+          className="flex justify-center gap-4 py-8"
+        >
+          <ProgramList
+            programs={programs}
+            onProgramClick={handleProgramSelection}
+            selectedProgramId={selectedProgram?.id}
+          />
 
-        <ProgramDetails program={selectedProgram} />
-      </div>
+          <ProgramDetails program={selectedProgram} />
+        </div>
+      )}
     </div>
   );
 };
@@ -107,7 +121,16 @@ export const loader = async ({ params, request }) => {
 
   const bootcamps = await queryClient.fetchQuery({
     queryKey: ['bootcamps', { ...searchParams }],
-    queryFn: () => getBootcamps({ limit: 10, ...searchParams }),
+    queryFn: () => {
+      const maximumCost = searchParams.maximumCost;
+      delete searchParams.maximumCost;
+
+      return getBootcamps({
+        limit: 10,
+        ...searchParams,
+        averageCost: { lte: maximumCost },
+      });
+    },
   });
   return bootcamps;
 };
