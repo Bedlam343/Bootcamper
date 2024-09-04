@@ -150,6 +150,8 @@ const Teach = () => {
 // fetch programs belonging to the user
 export const loader = async ({ params }) => {
   const { userId } = params;
+  if (!userId || userId === 'undefined') return [];
+
   const bootcamps = await queryClient.fetchQuery({
     queryKey: ['my-bootcamps'],
     queryFn: () => getBootcamps({ user: userId }),
