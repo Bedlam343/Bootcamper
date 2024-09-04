@@ -82,7 +82,7 @@ const ProgramDetails = ({
     <>
       <div
         style={{ ...style }}
-        className="sm:max-w-[750px] overflow-auto bg-lightBlack"
+        className="w-[750px] overflow-auto bg-lightBlack"
       >
         <div ref={imageRef} className="group">
           <img
