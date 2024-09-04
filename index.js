@@ -93,7 +93,7 @@ app.use(
         'wss:',
       ],
       'script-src': ["'self'", "'unsafe-inline'"],
-      'style-src': ["'self'", "'unsafe-inline'"],
+      'style-src': ["'self'", "'unsafe-inline'", 'https://*.googleapis.com'],
     },
   })
 );
