@@ -56,7 +56,8 @@ app.use(
       directives: {
         'default-src': [
           "'self'",
-          'https://*.googleapis.com',
+          'fonts.googleapis.com',
+          'fonts.gstatic.com',
           'google.com',
           'youtube.com',
         ],
