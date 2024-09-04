@@ -82,7 +82,7 @@ const ProgramDetails = ({
     <>
       <div
         style={{ ...style }}
-        className="w-[750px] overflow-auto bg-lightBlack"
+        className="sm:max-w-[750px] overflow-auto bg-lightBlack"
       >
         <div ref={imageRef} className="group">
           <img
@@ -212,7 +212,7 @@ const ProgramDetails = ({
           </div>
 
           <div className="mt-8">
-            <p className="text-2xl font-cairo text-white">Course Breakdown</p>
+            <p className="text-2xl font-cairo text-white">Units Breakdown</p>
 
             <div className="w-[100%] flex justify-center mt-8">
               <div className="w-[80%] flex flex-col gap-y-6">

@@ -11,6 +11,7 @@ export const getBootcamp = (bootcampId) => {
 export const getBootcamps = async (params = {}) => {
   console.log('getBootcamps');
   let bootcamps = [];
+  let pagination = {};
   try {
     const response = await axios.get(`/api/v1/bootcamps`, {
       params: {
@@ -18,10 +19,11 @@ export const getBootcamps = async (params = {}) => {
       },
     });
     bootcamps = response.data.data;
+    pagination = response.data.pagination;
   } catch (error) {
     console.log(error);
   }
-  return bootcamps;
+  return { bootcamps, pagination };
 };
 
 export const getMyBootcamps = (userId, token) => {

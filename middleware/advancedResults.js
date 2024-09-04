@@ -8,7 +8,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   // Fields to exclude (filtering)
   // if one of the query parameters is "select" (we decide what)
   // we don't want to match a field with these in a document (table)
-  const removeFields = ["select", "sort", "page", "limit"];
+  const removeFields = ['select', 'sort', 'page', 'limit'];
 
   // Loop over removeFields and delete them from reqQuery
   removeFields.forEach((param) => delete reqQuery[param]);
@@ -39,7 +39,7 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   // Select Fields (if select exists in url)
   if (req.query.select) {
     // split wherever there's a comma and rejoin with space in b/w
-    const fields = req.query.select.split(",").join(" ");
+    const fields = req.query.select.split(',').join(' ');
     // console.log(fields);
 
     // Now, select the fields that user wants
@@ -48,13 +48,13 @@ const advancedResults = (model, populate) => async (req, res, next) => {
 
   // Sort (if field present)
   if (req.query.sort) {
-    const sortBy = req.query.sort.split(",").join(" ");
+    const sortBy = req.query.sort.split(',').join(' ');
     query = query.sort(sortBy);
   }
   // default sort by date
   else {
     // createdAt is a field in our Model
-    query = query.sort("-createdAt");
+    query = query.sort('-createdAt');
   }
 
   // Pagination
@@ -64,8 +64,9 @@ const advancedResults = (model, populate) => async (req, res, next) => {
   const limit = parseInt(req.query.limit, 10) || 25;
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
-  // Mongoose method
-  const total = await model.countDocuments();
+
+  // count number of documents matching the query
+  const total = await model.countDocuments(query);
 
   query = query.skip(startIndex).limit(limit);
 

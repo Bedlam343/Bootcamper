@@ -13,7 +13,7 @@ export const loader = async () => {
   const params = {
     limit: 4,
   };
-  const bootcamps = await queryClient.fetchQuery({
+  const { bootcamps } = await queryClient.fetchQuery({
     queryKey: ['home-bootcamps'],
     queryFn: () => getBootcamps(params),
   });
