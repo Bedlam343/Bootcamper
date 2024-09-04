@@ -54,11 +54,22 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        defaultSrc: ["'self'", 'google.com', 'youtube.com'],
-        styleSrc: ["'self'", 'google.com', 'youtube.com', "'unsafe-inline'"],
-        scriptSrc: ["'self'", 'google.com', 'youtube.com', "'unsafe-inline'"],
-        imgSrc: ["'self'", 'google.com', 'youtube.com', 'data:', 'blob:'],
-        connectSrc: [
+        'default-src': ["'self'", 'google.com', 'youtube.com'],
+        'style-src': [
+          "'self'",
+          'https://*.googleapis.com',
+          'google.com',
+          'youtube.com',
+          "'unsafe-inline'",
+        ],
+        'script-src': [
+          "'self'",
+          'google.com',
+          'youtube.com',
+          "'unsafe-inline'",
+        ],
+        'img-src': ["'self'", 'google.com', 'youtube.com', 'data:', 'blob:'],
+        'connect-src': [
           "'self'",
           'https://*.googleapis.com',
           'google.com',
@@ -66,9 +77,9 @@ app.use(
           'ws:',
           'wss:',
         ],
-        frameSrc: ["'self'", 'google.com', 'youtube.com'],
-        frameAncestors: ["'self'", 'google.com', 'youtube.com'],
-        mediaSrc: ["'self'", 'google.com', 'youtube.com', 'data:', 'blob:'],
+        'frame-src': ["'self'", 'google.com', 'youtube.com'],
+        'frame-ancestors': ["'self'", 'google.com', 'youtube.com'],
+        'media-src': ["'self'", 'google.com', 'youtube.com', 'data:', 'blob:'],
       },
     },
     frameguard: { action: 'SAMEORIGIN' },
@@ -78,25 +89,25 @@ app.use(
 // Prevent XSS attacks
 app.use(xss());
 
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      'img-src': ["'self'", 'https: data:', 'blob:'],
-      'default-src': ["'self'"],
-      'connect-src': [
-        "'self'",
-        'https://*.googleapis.com',
-        'google.com',
-        'youtube.com',
-        'ws:',
-        'wss:',
-      ],
-      'script-src': ["'self'", "'unsafe-inline'"],
-      'style-src': ["'self'", "'unsafe-inline'", 'https://*.googleapis.com'],
-    },
-  })
-);
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     useDefaults: true,
+//     directives: {
+//       'img-src': ["'self'", 'https: data:', 'blob:'],
+//       'default-src': ["'self'"],
+//       'connect-src': [
+//         "'self'",
+//         'https://*.googleapis.com',
+//         'google.com',
+//         'youtube.com',
+//         'ws:',
+//         'wss:',
+//       ],
+//       'script-src': ["'self'", "'unsafe-inline'"],
+//       'style-src': ["'self'", "'unsafe-inline'", 'https://*.googleapis.com'],
+//     },
+//   })
+// );
 
 // Rate limiting
 // const limiter = rateLimit({
