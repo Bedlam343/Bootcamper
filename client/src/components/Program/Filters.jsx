@@ -29,6 +29,7 @@ const Filters = forwardRef(({ filters = {}, onChange, onReset }, ref) => {
       ref={ref}
       className="flex justify-center items-center gap-4 border-b-[1px] border-[#575757]"
     >
+      <p className="text-white font-cairo text-xl underline">Filters:</p>
       {FILTERS.map(({ img, label, filter }) => (
         <div
           key={filter}
