@@ -54,7 +54,12 @@ app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
-        'default-src': ["'self'", 'google.com', 'youtube.com'],
+        'default-src': [
+          "'self'",
+          'https://*.googleapis.com',
+          'google.com',
+          'youtube.com',
+        ],
         'style-src': [
           "'self'",
           'https://*.googleapis.com',
@@ -68,7 +73,14 @@ app.use(
           'youtube.com',
           "'unsafe-inline'",
         ],
-        'img-src': ["'self'", 'google.com', 'youtube.com', 'data:', 'blob:'],
+        'img-src': [
+          "'self'",
+          'https://*.googleapis.com',
+          'google.com',
+          'youtube.com',
+          'data:',
+          'blob:',
+        ],
         'connect-src': [
           "'self'",
           'https://*.googleapis.com',
