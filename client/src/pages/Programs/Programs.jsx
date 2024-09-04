@@ -129,6 +129,7 @@ const Programs = () => {
             <ProgramDetails program={selectedProgram} />
           </div>
 
+          {/* pagination buttons */}
           <div className="w-[100%] flex justify-center gap-[100px]">
             <div
               onClick={onDecrementPage}

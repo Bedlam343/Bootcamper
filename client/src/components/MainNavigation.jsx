@@ -51,9 +51,9 @@ const MainNavigation = () => {
               <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
                 <NavLink to={`/teach/${userId || 'undefined'}`}>Teach</NavLink>
               </li>
-              <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
-                <NavLink to="/about">About</NavLink>
-              </li>
+              {/* <li className="hover:cursor-pointer hover:text-themeBlue text-[14px]  lg:text-[16px]">
+                <NavLink to="/">About</NavLink>
+              </li> */}
             </ul>
 
             {isLoggedIn ? (
