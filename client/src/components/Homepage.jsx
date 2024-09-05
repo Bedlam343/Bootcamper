@@ -125,54 +125,57 @@ const Homepage = ({ bootcamps }) => {
               <div
                 key={bootcamp.id}
                 id={bootcamp.id}
-                className={`min-w-[300px] max-w-[400px] bg-lightBlack border-2
+                className={`min-w-[300px] flex flex-col justify-between max-w-[400px] bg-lightBlack border-2
                   border-[#acacac]`}
               >
-                <img
-                  src={bootcamp.photo}
-                  alt=""
-                  className="w-[400px] h-[130px] object-cover"
-                />
+                <div>
+                  <img
+                    src={bootcamp.photo}
+                    alt=""
+                    className="w-[400px] h-[130px] object-cover"
+                  />
 
-                <div
-                  className={`px-4 py-4 group-hover:bg-gray-700 bg-lightBlack`}
-                >
-                  <p
-                    className={`font-cairo font-semibold text-xl text-white group-hover:underline`}
+                  <div
+                    className={`px-4 py-4 group-hover:bg-gray-700 bg-lightBlack`}
                   >
-                    {bootcamp.name}
-                  </p>
+                    <p
+                      className={`font-cairo font-semibold text-xl text-white group-hover:underline`}
+                    >
+                      {bootcamp.name}
+                    </p>
 
-                  <div className="flex gap-x-2 items-start mt-3">
-                    <img
-                      src="/assets/target.png"
-                      alt="Target"
-                      className="w-[20px] h-[20px]"
-                    />
-                    <div className="font-cairo flex flex-wrap gap-x-2 text-[14px] text-[#cbcbcb]">
-                      {bootcamp.careers.map((career, index) => (
-                        <div
-                          key={career}
-                          className="flex justify-center gap-2 items-center"
-                        >
-                          <p className="">{career}</p>
-                          {index < bootcamp.careers.length - 1 && (
-                            <div className="w-[4px] h-[4px] rounded-full bg-[#cbcbcb]" />
-                          )}
-                        </div>
-                      ))}
+                    <div className="flex gap-x-2 items-start mt-3">
+                      <img
+                        src="/assets/target.png"
+                        alt="Target"
+                        className="w-[20px] h-[20px]"
+                      />
+                      <div className="font-cairo flex flex-wrap gap-x-2 text-[14px] text-[#cbcbcb]">
+                        {bootcamp.careers.map((career, index) => (
+                          <div
+                            key={career}
+                            className="flex justify-center gap-2 items-center"
+                          >
+                            <p className="">{career}</p>
+                            {index < bootcamp.careers.length - 1 && (
+                              <div className="w-[4px] h-[4px] rounded-full bg-[#cbcbcb]" />
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <div className="flex justify-end mt-4">
-                    <NavLink to={`/programs#${bootcamp.id}`}>
-                      <button
-                        className="rounded-[5px] w-[80px] h-[40px] bg-easyWhite
+                </div>
+
+                <div className="flex justify-end px-4 py-4">
+                  <NavLink to={`/programs#${bootcamp.id}`}>
+                    <button
+                      className="rounded-[5px] w-[80px] h-[40px] bg-easyWhite
                       hover:bg-white flex items-center justify-center group"
-                      >
-                        <p className="text-black uppercase">Details</p>
-                      </button>
-                    </NavLink>
-                  </div>
+                    >
+                      <p className="text-black uppercase">Details</p>
+                    </button>
+                  </NavLink>
                 </div>
               </div>
             ))}
