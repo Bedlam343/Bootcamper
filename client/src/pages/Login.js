@@ -127,6 +127,14 @@ const Login = () => {
         >
           <p className="">Copyright @ 2024, Codemasons.</p>
           <p>Codemasons is licensed by the Accepted Rite of Codemasonry.</p>
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.flaticon.com/free-icons/hammer"
+            title="hammer icons"
+          >
+            Hammer icons created by Freepik - Flaticon
+          </a>
         </div>
       </div>
     </>
